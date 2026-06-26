@@ -4,7 +4,18 @@ import { guides } from "@/data/guides";
 import { products } from "@/data/products";
 import { siteConfig } from "@/lib/site";
 
-const staticRoutes = ["/", "/products", "/support", "/b2b", "/guides"];
+const staticRoutes = [
+  "/",
+  "/about",
+  "/why-choose-aulexmed",
+  "/factory",
+  "/certificates",
+  "/contact",
+  "/products",
+  "/support",
+  "/b2b",
+  "/guides"
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

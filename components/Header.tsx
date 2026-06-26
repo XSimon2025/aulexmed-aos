@@ -4,6 +4,7 @@ import { categories } from "@/data/categories";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/products", label: "Products" },
   { href: "/support", label: "Support" },
   { href: "/b2b", label: "Wholesale" },
