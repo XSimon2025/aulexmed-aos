@@ -13,6 +13,12 @@ Official AULEXMED brand website built with Next.js App Router, TypeScript, and T
 - Static product, category, guide, and manual data
 - SEO metadata, robots, and sitemap
 
+## Master Target
+
+The long-term project direction is documented in `AULEXMED_MASTER_TARGET.md` at the project root.
+
+Current email note: Google Workspace is a possible future business email direction, but the final email provider decision is postponed and should not block Version 1.1 work.
+
 ## Local Development
 
 Install dependencies:
