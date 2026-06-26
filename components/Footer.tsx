@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { b2bPaths } from "@/data/b2b";
 import { categories } from "@/data/categories";
 import { siteConfig } from "@/lib/site";
 
@@ -44,6 +45,9 @@ export function Footer() {
             <Link href="/support/warranty">Warranty</Link>
             <Link href="/support/replacement-parts">Replacement Parts</Link>
             <Link href="/b2b">Wholesale</Link>
+            {b2bPaths.map((path) => (
+              <Link key={path.href} href={path.href}>{path.title}</Link>
+            ))}
             <Link href="/guides">Guides</Link>
           </div>
         </div>

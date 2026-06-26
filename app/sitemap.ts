@@ -20,6 +20,11 @@ const staticRoutes = [
   "/support/replacement-parts",
   "/support/contact-support",
   "/b2b",
+  "/b2b/wholesale",
+  "/b2b/oem-odm",
+  "/b2b/distributor-program",
+  "/b2b/catalog-download",
+  "/b2b/request-quotation",
   "/guides"
 ];
 

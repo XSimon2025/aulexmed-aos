@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { b2bPaths } from "@/data/b2b";
 import { categories } from "@/data/categories";
 import { products } from "@/data/products";
 import { buildMetadata, siteConfig } from "@/lib/site";
@@ -111,10 +112,10 @@ export default function B2BPage() {
                 customization, packaging, product documentation, and a clear quotation workflow.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href="#request-quotation" className="rounded-md bg-brand-blue px-6 py-3 text-center text-sm font-semibold text-white hover:bg-brand-navy">
+                <Link href="/b2b/request-quotation" className="rounded-md bg-brand-blue px-6 py-3 text-center text-sm font-semibold text-white hover:bg-brand-navy">
                   Request Quotation
                 </Link>
-                <Link href="#customization" className="rounded-md border border-brand-line px-6 py-3 text-center text-sm font-semibold text-brand-navy hover:border-brand-blue">
+                <Link href="/b2b/oem-odm" className="rounded-md border border-brand-line px-6 py-3 text-center text-sm font-semibold text-brand-navy hover:border-brand-blue">
                   View Custom Options
                 </Link>
               </div>
@@ -135,6 +136,21 @@ export default function B2BPage() {
 
       <section className="section-y bg-slate-50">
         <div className="container-page">
+          <p className="eyebrow">B2B Buyer Paths</p>
+          <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Choose the right cooperation path</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+            {b2bPaths.map((path) => (
+              <Link key={path.href} href={path.href} className="rounded-lg border border-brand-line bg-white p-5 hover:border-brand-blue">
+                <h3 className="font-bold text-brand-navy">{path.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{path.body}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y bg-white">
+        <div className="container-page">
           <p className="eyebrow">Who This Page Is For</p>
           <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Different from retail product pages</h2>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600">
@@ -152,7 +168,7 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section className="section-y bg-white">
+      <section className="section-y bg-slate-50">
         <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="eyebrow">Factory Capability</p>
@@ -172,7 +188,7 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section className="section-y bg-slate-50">
+      <section className="section-y bg-white">
         <div className="container-page">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -197,7 +213,7 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section id="customization" className="section-y bg-white">
+      <section id="customization" className="section-y bg-slate-50">
         <div className="container-page">
           <p className="eyebrow">Customization Logic</p>
           <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">What B2B buyers usually need to confirm</h2>
@@ -216,7 +232,7 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section className="section-y bg-slate-50">
+      <section className="section-y bg-white">
         <div className="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="eyebrow">Cooperation Process</p>
@@ -239,7 +255,7 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section className="section-y bg-white">
+      <section className="section-y bg-slate-50">
         <div className="container-page">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
