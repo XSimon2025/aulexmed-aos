@@ -13,6 +13,12 @@ const staticRoutes = [
   "/contact",
   "/products",
   "/support",
+  "/support/manuals",
+  "/support/how-to-wear",
+  "/support/size-guide",
+  "/support/warranty",
+  "/support/replacement-parts",
+  "/support/contact-support",
   "/b2b",
   "/guides"
 ];

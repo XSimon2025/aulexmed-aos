@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { FAQSection } from "@/components/FAQSection";
 import { manuals } from "@/data/manuals";
+import { supportTopics } from "@/data/support";
 import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
@@ -9,29 +10,6 @@ export const metadata = buildMetadata({
   description: "Find AULEXMED user manuals, how-to-wear guides, size guide placeholders, FAQ, warranty, and replacement parts support.",
   path: "/support"
 });
-
-const supportBlocks = [
-  {
-    id: "how-to-wear",
-    title: "How to Wear",
-    body: "Step-by-step wearing pages can be linked from product instruction cards and package inserts."
-  },
-  {
-    id: "size-guide",
-    title: "Size Guide",
-    body: "A central size guide area for knee, ankle, walking boot, back, wrist, and finger support products."
-  },
-  {
-    id: "warranty",
-    title: "Warranty",
-    body: "A clean policy page framework for retail customers, distributors, and platform support teams."
-  },
-  {
-    id: "parts",
-    title: "Replacement / Missing Parts",
-    body: "A future form area for straps, liners, accessories, and missing parts requests."
-  }
-];
 
 const faqs = [
   {
@@ -92,11 +70,11 @@ export default function SupportPage() {
 
       <section className="section-y bg-white">
         <div className="container-page grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {supportBlocks.map((block) => (
-            <article id={block.id} key={block.id} className="rounded-lg border border-brand-line bg-slate-50 p-6">
-              <h2 className="text-xl font-bold text-brand-navy">{block.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{block.body}</p>
-            </article>
+          {supportTopics.map((topic) => (
+            <Link key={topic.href} href={topic.href} className="rounded-lg border border-brand-line bg-slate-50 p-6 hover:border-brand-blue">
+              <h2 className="text-xl font-bold text-brand-navy">{topic.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{topic.body}</p>
+            </Link>
           ))}
         </div>
       </section>
@@ -117,7 +95,7 @@ export default function SupportPage() {
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
             Include your SKU, marketplace order channel, photos if relevant, and a short description of the issue.
           </p>
-          <Link href={`mailto:${siteConfig.email}?subject=AULEXMED%20Support%20Request`} className="mt-5 inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
+          <Link href="/support/contact-support" className="mt-5 inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
             Email Support
           </Link>
         </div>

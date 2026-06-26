@@ -38,9 +38,11 @@ export function Footer() {
         <div>
           <p className="font-semibold">Support</p>
           <div className="mt-3 grid gap-2 text-sm text-slate-200">
-            <Link href="/support#manuals">User Manuals</Link>
-            <Link href="/support#size-guide">Size Guide</Link>
-            <Link href="/support#faq">FAQ</Link>
+            <Link href="/support/manuals">User Manuals</Link>
+            <Link href="/support/how-to-wear">How to Wear</Link>
+            <Link href="/support/size-guide">Size Guide</Link>
+            <Link href="/support/warranty">Warranty</Link>
+            <Link href="/support/replacement-parts">Replacement Parts</Link>
             <Link href="/b2b">Wholesale</Link>
             <Link href="/guides">Guides</Link>
           </div>
