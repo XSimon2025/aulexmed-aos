@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.npm-cache
+.env
+.env*.local
+*.log
+.DS_Store
+tmp
+
+# Local source/reference assets. Keep deployable assets in public/.
+产品分类/
+产品画册.pdf
+*.psd
+*.ai
