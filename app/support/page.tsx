@@ -7,18 +7,18 @@ import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "Support Center",
-  description: "Find AULEXMED user manuals, how-to-wear guides, size guide placeholders, FAQ, warranty, and replacement parts support.",
+  description: "Find AULEXMED user manuals, how-to-wear guides, size guides, FAQ, warranty, video tutorials, return policy, and replacement parts support.",
   path: "/support"
 });
 
 const faqs = [
   {
     question: "Where can I find my product manual?",
-    answer: "Use the manual list below and match the SKU on your package or product card. PDF files are placeholders in this first version."
+    answer: "Use the manual list below and match the SKU on your package or product card. If your exact file is not listed, contact support with the SKU."
   },
   {
     question: "How do I choose the right size?",
-    answer: "Start with the product-specific size guide. Final measurement charts can be added to each product page and the central size guide."
+    answer: "Start with the product-specific size guide and measure before purchase. If you are between sizes, contact support before ordering."
   },
   {
     question: "Who should I contact for wholesale support?",
@@ -35,7 +35,7 @@ export default function SupportPage() {
           <p className="eyebrow mt-6">Customer Support</p>
           <h1 className="mt-3 text-4xl font-bold text-brand-navy">Support Center</h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            A central place for manuals, wearing instructions, size guides, FAQ, warranty, and replacement parts support.
+            A central place for manuals, wearing instructions, size guides, video tutorials, FAQ, warranty, return policy, replacement parts, and direct support.
           </p>
         </div>
       </section>
@@ -95,9 +95,14 @@ export default function SupportPage() {
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
             Include your SKU, marketplace order channel, photos if relevant, and a short description of the issue.
           </p>
-          <Link href="/support/contact-support" className="mt-5 inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
-            Email Support
-          </Link>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <Link href="/support/contact-support" className="inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
+              Email Support
+            </Link>
+            <a href={`mailto:${siteConfig.supportEmail}`} className="inline-flex rounded-md border border-brand-line bg-white px-5 py-3 text-sm font-semibold text-brand-navy hover:border-brand-blue">
+              {siteConfig.supportEmail}
+            </a>
+          </div>
         </div>
       </section>
     </>

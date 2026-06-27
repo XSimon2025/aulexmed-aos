@@ -18,7 +18,7 @@ export default function HowToWearPage() {
           <p className="eyebrow mt-6">How to Wear</p>
           <h1 className="mt-3 text-4xl font-bold text-brand-navy">General wearing guidance</h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            These first-phase instructions give a safe structure for product help pages. Product-specific photos, videos, and manuals can be added later.
+            Start with these practical fit checks, then use the product page or manual for SKU-specific details when available.
           </p>
         </div>
       </section>
@@ -40,7 +40,7 @@ export default function HowToWearPage() {
         <div className="container-page rounded-lg border border-brand-line bg-slate-50 p-6 md:p-8">
           <h2 className="text-2xl font-bold text-brand-navy">Need product-specific instructions?</h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
-            Use the product catalog to find your SKU. Each product page is prepared for future manual, size guide, FAQ, and how-to-wear sections.
+            Use the product catalog to find your SKU. Each product page connects manuals, size guidance, FAQ, and how-to-wear support.
           </p>
           <Link href="/products" className="mt-5 inline-flex text-sm font-semibold text-brand-blue hover:text-brand-navy">
             Browse product pages

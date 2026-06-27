@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { certificatePlaceholders } from "@/data/brand";
+import { certificateDocuments } from "@/data/brand";
 import { buildB2BMailto } from "@/data/b2b";
 import { buildMetadata } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "AULEXMED Catalog Download",
   description:
-    "AULEXMED B2B catalog download placeholder page for orthopedic support catalog, SKU list, factory profile, and approved business documents.",
+    "AULEXMED B2B catalog request page for orthopedic support catalog, SKU list, factory profile, and approved business documents.",
   path: "/b2b/catalog-download"
 });
 
@@ -31,7 +31,7 @@ export default function CatalogDownloadPage() {
             Catalog and document center for B2B review.
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            Approved downloadable files can be added here later. The first version keeps placeholders to avoid publishing unverified files.
+            Request catalog, SKU list, factory profile, and approved business documents for distributor, wholesale, and OEM / ODM review.
           </p>
           <Link href={mailto} className="mt-8 inline-flex rounded-md bg-brand-blue px-6 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
             Request Catalog by Email
@@ -41,7 +41,7 @@ export default function CatalogDownloadPage() {
 
       <section className="section-y bg-slate-50">
         <div className="container-page grid gap-5 md:grid-cols-2">
-          {certificatePlaceholders.map((item) => (
+          {certificateDocuments.map((item) => (
             <article key={item.title} className="rounded-lg border border-brand-line bg-white p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h2 className="text-xl font-bold text-brand-navy">{item.title}</h2>

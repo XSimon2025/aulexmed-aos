@@ -10,7 +10,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <p className="text-xl font-bold">AULEXMED</p>
           <p className="mt-2 max-w-xl text-sm leading-6 text-slate-200">
-            {siteConfig.slogan}. Practical orthopedic support products for daily movement, retail channels, and B2B partners.
+            {siteConfig.slogan}. Practical orthopedic support for daily movement, customer support, and international B2B cooperation.
           </p>
           <a className="mt-4 inline-flex text-sm font-semibold text-sky-200" href={`mailto:${siteConfig.email}`}>
             {siteConfig.email}
@@ -42,7 +42,9 @@ export function Footer() {
             <Link href="/support/manuals">User Manuals</Link>
             <Link href="/support/how-to-wear">How to Wear</Link>
             <Link href="/support/size-guide">Size Guide</Link>
+            <Link href="/support/video-tutorials">Video Tutorials</Link>
             <Link href="/support/warranty">Warranty</Link>
+            <Link href="/support/return-policy">Return Policy</Link>
             <Link href="/support/replacement-parts">Replacement Parts</Link>
             <Link href="/b2b">Wholesale</Link>
             {b2bPaths.map((path) => (
@@ -53,7 +55,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4">
-        <div className="container-page text-xs text-slate-300">Copyright © 2026 AULEXMED. First-phase website framework.</div>
+        <div className="container-page text-xs text-slate-300">Copyright © 2026 AULEXMED. All rights reserved.</div>
       </div>
     </footer>
   );

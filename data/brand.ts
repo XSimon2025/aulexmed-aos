@@ -1,7 +1,7 @@
 export const brandTrustPoints = [
   "Orthopedic support product catalog from neck to foot",
   "Factory-backed supply for retail and B2B buyers",
-  "Clear size guide, manual, and support content roadmap",
+  "Clear size guide, manual, and support content system",
   "Purchase routing for Temu, Amazon, TikTok, and inquiry flows"
 ];
 
@@ -19,8 +19,8 @@ export const brandValues = [
     body: "Business buyers need category coverage, production capability, packaging support, and a clear quotation workflow."
   },
   {
-    title: "Long-Term Platform",
-    body: "The website is built to grow into a product, support, SEO, B2B, and future commerce center."
+    title: "Long-Term Brand Support",
+    body: "The website connects product education, support resources, B2B cooperation, and purchase routing in one official brand experience."
   }
 ];
 
@@ -33,25 +33,25 @@ export const capabilityItems = [
   "Catalog-driven SKU system prepared for product pages, manuals, and quotation workflows"
 ];
 
-export const certificatePlaceholders = [
+export const certificateDocuments = [
   {
     title: "Business License",
-    status: "Placeholder",
-    body: "Add verified company registration documents when final public files are approved."
+    status: "Available on request",
+    body: "Verified company registration documents can be shared with qualified business buyers when appropriate."
   },
   {
     title: "Product Compliance Documents",
-    status: "Placeholder",
-    body: "Add relevant test reports or compliance documents only after the approved files are ready for publication."
+    status: "Available on request",
+    body: "Relevant test reports or compliance documents are handled through the B2B review process."
   },
   {
     title: "Factory Capability Documents",
-    status: "Placeholder",
-    body: "Add factory profile, production capability, and catalog files for distributor review."
+    status: "Available on request",
+    body: "Factory profile, production capability, and catalog files can support distributor review."
   },
   {
     title: "B2B Catalog",
-    status: "Placeholder",
-    body: "Prepare downloadable catalog versions for wholesale, OEM / ODM, and distributor conversations."
+    status: "Request by email",
+    body: "Catalog versions are available for wholesale, OEM / ODM, and distributor conversations."
   }
 ];

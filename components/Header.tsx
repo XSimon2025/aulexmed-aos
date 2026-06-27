@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { categories } from "@/data/categories";
 
 const navItems = [
@@ -32,21 +33,27 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <Link
-          href="/b2b#request-quotation"
-          className="hidden rounded-md bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-navy sm:inline-flex"
-        >
-          Request Quote
-        </Link>
+        <div className="hidden items-center gap-3 sm:flex">
+          <LanguageSelector />
+          <Link
+            href="/b2b#request-quotation"
+            className="rounded-md bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-navy"
+          >
+            Request Quote
+          </Link>
+        </div>
       </div>
       <div className="border-t border-brand-line bg-brand-sky/70 lg:hidden">
-        <nav className="container-page flex gap-4 overflow-x-auto py-2 text-sm font-semibold text-slate-700">
-          {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="whitespace-nowrap">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="container-page flex items-center gap-4 overflow-x-auto py-2">
+          <nav className="flex flex-1 gap-4 text-sm font-semibold text-slate-700">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} className="whitespace-nowrap">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <LanguageSelector />
+        </div>
       </div>
       <div className="hidden border-t border-brand-line bg-slate-50 lg:block">
         <div className="container-page flex gap-5 overflow-x-auto py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">

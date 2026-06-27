@@ -19,7 +19,7 @@ export const b2bPaths = [
   {
     href: "/b2b/catalog-download",
     title: "Catalog Download",
-    body: "For buyers who need catalog, SKU list, product line overview, and document placeholders before quotation."
+    body: "For buyers who need catalog, SKU list, product line overview, and approved document review before quotation."
   },
   {
     href: "/b2b/request-quotation",
@@ -48,7 +48,7 @@ export const customizationOptions = [
   },
   {
     title: "Content",
-    points: ["Size guide", "How-to-wear steps", "Manual placeholder", "FAQ copy", "Listing content support"]
+    points: ["Size guide", "How-to-wear steps", "Manual content", "FAQ copy", "Listing content support"]
   },
   {
     title: "Order Planning",

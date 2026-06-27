@@ -1,36 +1,36 @@
 export const homeTrustStats = [
-  "20+ years manufacturing experience referenced by brand materials",
+  "20+ years manufacturing experience",
   "2,550 m² facility",
   "OEM / ODM support",
-  "Product support pages for package QR traffic"
+  "Support resources for product owners"
 ];
 
 export const homeUserJourneys = [
   {
-    title: "Marketplace Customers",
+    title: "Product Owners",
     label: "TikTok / Temu / Amazon",
-    body: "Find product support, manuals, size guidance, and purchase routes without needing a full checkout on this site.",
+    body: "Find support, manuals, sizing guidance, and reliable purchase routes after discovering AULEXMED on a marketplace.",
     href: "/support",
     cta: "Visit Support Center"
   },
   {
-    title: "Package QR Visitors",
+    title: "Manual & Warranty Visitors",
     label: "Manuals / Warranty",
-    body: "Move from package inserts to user manuals, how-to-wear guidance, warranty support, and missing-parts help.",
+    body: "Move quickly from product packaging to user manuals, how-to-wear guidance, warranty support, and missing-parts help.",
     href: "/support/manuals",
     cta: "Find Manuals"
   },
   {
-    title: "Google Search Visitors",
+    title: "Research Visitors",
     label: "Guides / Education",
-    body: "Read practical buying guides, comparison articles, and size-guide content before viewing product pages.",
+    body: "Read practical guides, comparison articles, and size information before choosing the right support product.",
     href: "/guides",
     cta: "Read Guides"
   },
   {
     title: "B2B Buyers",
     label: "Wholesale / OEM",
-    body: "Review factory capability, product categories, catalog placeholders, and quotation paths for business sourcing.",
+    body: "Review factory capability, product categories, compliance readiness, customization options, and quotation paths.",
     href: "/b2b",
     cta: "Open B2B Center"
   }
@@ -44,7 +44,7 @@ export const homePlatformSystems = [
   },
   {
     title: "Product Catalog",
-    body: "Static product data supports category pages, product details, marketplace purchase links, and quote routing.",
+    body: "Category and detail pages help customers compare products and choose the correct purchase or inquiry path.",
     href: "/products"
   },
   {
@@ -59,10 +59,10 @@ export const homePlatformSystems = [
   }
 ];
 
-export const homeInfrastructureSteps = [
-  "Local development",
-  "GitHub source of truth",
-  "Vercel automatic deployment",
-  "Cloudflare DNS and domain routing",
-  "Search Console and analytics readiness"
+export const homeBrandValues = [
+  "Professional orthopedic support for daily movement",
+  "Clear guidance before and after purchase",
+  "Support resources for every product owner",
+  "International cooperation for distributors and B2B buyers",
+  "Compliance-minded manufacturing and documentation"
 ];

@@ -33,7 +33,7 @@ export default function RequestQuotationPage() {
             Send a complete B2B inquiry for faster quotation.
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            This first version uses a prepared email template instead of a backend form. It helps buyers send enough information for product matching and quotation discussion.
+            Use the prepared email template to send enough information for product matching, sample planning, packaging review, and quotation discussion.
           </p>
           <Link href={mailto} className="mt-8 inline-flex rounded-md bg-brand-blue px-6 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
             Open RFQ Email Template

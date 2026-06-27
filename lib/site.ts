@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "AULEXMED",
-  slogan: "Knee & Ankle Orthopedic Experts",
+  slogan: "Back to Life. One Step at a Time.",
+  legacySlogan: "Knee & Ankle Orthopedic Experts",
   url: "https://www.aulexmed.com",
   email: "business@aulexmed.com",
+  supportEmail: "support@aulexmed.com",
+  ogImage: "/brand/back-to-life-hero.png",
   description:
-    "AULEXMED builds practical orthopedic support products for daily movement, including knee braces, ankle braces, walking boots, back support, and wrist support."
+    "AULEXMED builds practical orthopedic support products that help people return to everyday movement with confidence, including knee braces, ankle braces, walking boots, back support, and wrist support."
 };
 
 export function buildMetadata({
@@ -32,12 +35,21 @@ export function buildMetadata({
       description,
       url,
       siteName: siteConfig.name,
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1600,
+          height: 900,
+          alt: "AULEXMED Back to Life brand visual"
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description
+      description,
+      images: [siteConfig.ogImage]
     }
   };
 }

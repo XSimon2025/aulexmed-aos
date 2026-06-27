@@ -2,12 +2,12 @@ export const supportTopics = [
   {
     href: "/support/manuals",
     title: "User Manuals",
-    body: "Find SKU-based manual placeholders and request the correct document for your product."
+    body: "Find SKU-based manuals and request the correct document for your product."
   },
   {
     href: "/support/how-to-wear",
     title: "How to Wear",
-    body: "General wearing steps that can later expand into product-specific instruction pages and videos."
+    body: "Review practical wearing steps before using your AULEXMED support product."
   },
   {
     href: "/support/size-guide",
@@ -17,7 +17,7 @@ export const supportTopics = [
   {
     href: "/support/warranty",
     title: "Warranty",
-    body: "A clear support policy framework for marketplace customers and future warranty registration."
+    body: "A clear support policy path for marketplace customers, product owners, and distributor service needs."
   },
   {
     href: "/support/replacement-parts",
@@ -28,6 +28,21 @@ export const supportTopics = [
     href: "/support/contact-support",
     title: "Contact Support",
     body: "Email the support team with SKU, purchase channel, country, and a short description of your request."
+  },
+  {
+    href: "/support/video-tutorials",
+    title: "Video Tutorials",
+    body: "Access wearing and adjustment video resources as product-specific videos are added."
+  },
+  {
+    href: "/support/return-policy",
+    title: "Return Policy",
+    body: "Understand marketplace return routing and what information to prepare before contacting support."
+  },
+  {
+    href: "/support/contact-support",
+    title: "WhatsApp Support",
+    body: "Request WhatsApp assistance through the support team for country-specific service availability."
   }
 ];
 
@@ -73,6 +88,6 @@ export const supportFaqs = [
   },
   {
     question: "Are the manuals final PDFs?",
-    answer: "This first version uses placeholders. Approved downloadable PDF files can be added later."
+    answer: "Manual resources are organized by SKU. If a downloadable file is not available yet, contact support with your product model."
   }
 ];

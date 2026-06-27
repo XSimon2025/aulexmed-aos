@@ -35,10 +35,25 @@ const buyerTypes = [
 const factoryFacts = [
   "Xiamen Benli Medical Technology Co., Ltd.",
   "2,550 m² manufacturing facility",
-  "180,000+ units monthly production capacity referenced by current website",
-  "200,000+ pieces in stock referenced by current website",
+  "180,000+ units monthly production capacity",
+  "200,000+ pieces in stock capacity",
   "Orthopedic braces from neck to foot",
   "OEM and customized development support"
+];
+
+const certificationItems = [
+  {
+    title: "CE",
+    body: "CE documentation supports European market access discussions and shows that product files are prepared with EU compliance expectations in mind."
+  },
+  {
+    title: "EUDAMED",
+    body: "EUDAMED readiness helps international buyers review traceability, regulatory records, and medical device market preparation for Europe."
+  },
+  {
+    title: "ISO 13485",
+    body: "ISO 13485 reflects quality management practices for medical device manufacturing, supplier control, documentation, and repeatable production."
+  }
 ];
 
 const customOptions = [
@@ -52,7 +67,7 @@ const customOptions = [
   },
   {
     title: "Content Support",
-    points: ["Size guide", "How-to-wear steps", "Product specification sheet", "Manual placeholder", "Marketplace image set"]
+    points: ["Size guide", "How-to-wear steps", "Product specification sheet", "Manual content", "Marketplace image set"]
   },
   {
     title: "Order Planning",
@@ -108,8 +123,8 @@ export default function B2BPage() {
                 Orthopedic brace wholesale, private label, and OEM / ODM support.
               </h1>
               <p className="mt-5 max-w-3xl text-base leading-7 text-slate-600">
-                B2B buyers usually do not come here to buy one item. They need to know whether AULEXMED can support repeatable supply,
-                customization, packaging, product documentation, and a clear quotation workflow.
+                B2B buyers need more than a product list. They need to know whether AULEXMED can support repeatable supply,
+                OEM / ODM customization, packaging, product documentation, compliance preparation, and a clear quotation workflow.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="/b2b/request-quotation" className="rounded-md bg-brand-blue px-6 py-3 text-center text-sm font-semibold text-white hover:bg-brand-navy">
@@ -174,8 +189,8 @@ export default function B2BPage() {
             <p className="eyebrow">Factory Capability</p>
             <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Direct from manufacturer, built for long-term supply.</h2>
             <p className="mt-4 text-sm leading-6 text-slate-600">
-              The current AULEXMED website presents Benli Medical as a brace manufacturer with orthopedic support products across multiple body areas.
-              This B2B page turns that information into a clearer buyer decision path.
+              AULEXMED presents orthopedic support products across multiple body areas, with manufacturing capability prepared for wholesale,
+              private label, distributor, and international sourcing projects.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -183,6 +198,30 @@ export default function B2BPage() {
               <div key={fact} className="rounded-md border border-brand-line bg-slate-50 px-4 py-4 text-sm font-semibold leading-6 text-slate-700">
                 {fact}
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y bg-white">
+        <div className="container-page grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="eyebrow">Compliance Capability</p>
+            <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Certification signals for international buyers</h2>
+            <p className="mt-4 text-sm leading-6 text-slate-600">
+              Certifications are not only logos. For importers, distributors, and private label partners, they help evaluate quality systems,
+              regulatory preparation, documentation discipline, and readiness for market entry conversations.
+            </p>
+            <Link href="/certificates" className="mt-6 inline-flex rounded-md border border-brand-line px-5 py-3 text-sm font-semibold text-brand-navy hover:border-brand-blue">
+              View Certificates
+            </Link>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {certificationItems.map((item) => (
+              <article key={item.title} className="rounded-lg border border-brand-line bg-slate-50 p-6 shadow-sm">
+                <h3 className="text-2xl font-bold text-brand-blue">{item.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-slate-600">{item.body}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -238,7 +277,7 @@ export default function B2BPage() {
             <p className="eyebrow">Cooperation Process</p>
             <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">From product match to quotation</h2>
             <p className="mt-4 text-sm leading-6 text-slate-600">
-              The first goal is not checkout. It is to reduce back-and-forth and help buyers send enough information for a realistic quote.
+              The goal is to reduce back-and-forth and help buyers send enough information for a realistic quote.
             </p>
           </div>
           <div className="grid gap-4">
@@ -291,7 +330,7 @@ export default function B2BPage() {
             <p className="eyebrow">Request Quotation</p>
             <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Send a complete inquiry for faster reply</h2>
             <p className="mt-4 text-sm leading-6 text-slate-600">
-              This first version uses email instead of a backend form. The email button opens a prepared RFQ template so buyers can provide the right details.
+              The email button opens a prepared RFQ template so buyers can provide product, market, quantity, document, and customization details.
             </p>
             <Link href={mailto} className="mt-6 inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
               Email Quotation Request

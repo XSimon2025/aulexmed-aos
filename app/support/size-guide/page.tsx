@@ -5,7 +5,7 @@ import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "AULEXMED Size Guide",
-  description: "AULEXMED central size guide framework for knee braces, ankle braces, walking boots, back support, wrist support, and finger support.",
+  description: "AULEXMED central size guide for knee braces, ankle braces, walking boots, back support, wrist support, and finger support.",
   path: "/support/size-guide"
 });
 
@@ -18,9 +18,9 @@ export default function SizeGuidePage() {
         <div className="container-page">
           <Breadcrumb items={[{ href: "/support", label: "Support Center" }, { label: "Size Guide" }]} />
           <p className="eyebrow mt-6">Size Guide</p>
-          <h1 className="mt-3 text-4xl font-bold text-brand-navy">Central sizing framework</h1>
+          <h1 className="mt-3 text-4xl font-bold text-brand-navy">Central size guide</h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            Size charts should become product-specific over time. This page defines the category structure and gives visitors a clear support path.
+            Use the category guidance below as a starting point, then check the product page or contact support with your SKU and measurements.
           </p>
         </div>
       </section>

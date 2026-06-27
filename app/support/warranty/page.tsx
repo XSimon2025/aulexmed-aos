@@ -4,7 +4,7 @@ import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "AULEXMED Warranty Support",
-  description: "AULEXMED warranty support framework for marketplace customers, product documentation, and future warranty registration.",
+  description: "AULEXMED warranty support guidance for marketplace customers, product documentation, and service requests.",
   path: "/support/warranty"
 });
 
@@ -25,9 +25,9 @@ export default function WarrantyPage() {
         <div className="container-page">
           <Breadcrumb items={[{ href: "/support", label: "Support Center" }, { label: "Warranty" }]} />
           <p className="eyebrow mt-6">Warranty</p>
-          <h1 className="mt-3 text-4xl font-bold text-brand-navy">Warranty support framework</h1>
+          <h1 className="mt-3 text-4xl font-bold text-brand-navy">Warranty support</h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            This first version provides a clean support path. Final warranty terms can be added after marketplace, distributor, and legal wording is confirmed.
+            Prepare the details below so the support team can understand your product, purchase channel, and service request clearly.
           </p>
         </div>
       </section>

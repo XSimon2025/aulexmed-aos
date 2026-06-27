@@ -33,9 +33,28 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   const product = getProduct(categorySlug, slug);
   const category = getCategory(categorySlug);
   if (!product || !category) notFound();
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    sku: product.sku,
+    category: category.name,
+    image: product.gallery,
+    description: product.overview,
+    brand: {
+      "@type": "Brand",
+      name: "AULEXMED"
+    },
+    offers: {
+      "@type": "Offer",
+      url: product.purchaseLinks.temuShop,
+      availability: "https://schema.org/InStock"
+    }
+  };
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
       <section className="bg-white py-10">
         <div className="container-page">
           <Breadcrumb
@@ -82,7 +101,24 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </section>
 
       <section className="section-y bg-slate-50">
-        <div className="container-page grid gap-8 lg:grid-cols-3">
+        <div className="container-page grid gap-8 lg:grid-cols-4">
+          <div className="rounded-lg border border-brand-line bg-white p-6">
+            <h2 className="text-xl font-bold text-brand-navy">Overview</h2>
+            <dl className="mt-4 grid gap-3 text-sm leading-6 text-slate-600">
+              <div>
+                <dt className="font-semibold text-brand-navy">SKU</dt>
+                <dd>{product.sku}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-brand-navy">Category</dt>
+                <dd>{category.name}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-brand-navy">Support Path</dt>
+                <dd>Manuals, sizing, wearing guidance, FAQ, and support contact</dd>
+              </div>
+            </dl>
+          </div>
           <div className="rounded-lg border border-brand-line bg-white p-6">
             <h2 className="text-xl font-bold text-brand-navy">Key Features</h2>
             <ul className="mt-4 grid gap-3 text-sm leading-6 text-slate-600">
@@ -115,8 +151,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           <div>
             <p className="eyebrow">Product Help</p>
             <h2 className="mt-3 text-3xl font-bold text-brand-navy">FAQ and manual download area</h2>
+            <p className="mt-4 text-sm leading-6 text-slate-600">
+              Match the SKU on your product package before using manual, size, or wearing guidance.
+            </p>
             <Link href={product.manualUrl} className="mt-5 inline-flex rounded-md border border-brand-line px-5 py-3 text-sm font-semibold text-brand-navy hover:border-brand-blue">
-              User Manual Placeholder
+              User Manual Center
             </Link>
           </div>
           <FAQSection faqs={product.faqs} />
@@ -125,7 +164,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
       <CTASection
         title="Need bulk pricing or custom packaging?"
-        body="Send SKU, quantity, target market, and any packaging requirements. The first version routes inquiries to the B2B page and sales email."
+        body="Send SKU, quantity, target market, and any packaging requirements. AULEXMED can support wholesale, OEM / ODM, and distributor inquiries."
         primaryHref="/b2b#request-quotation"
         primaryLabel="Request a Quote"
         secondaryHref={`mailto:business@aulexmed.com?subject=AULEXMED%20Inquiry%20${product.sku}`}

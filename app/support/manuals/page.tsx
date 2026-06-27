@@ -5,7 +5,7 @@ import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "AULEXMED User Manuals",
-  description: "Find AULEXMED user manual placeholders by SKU and request the correct manual for knee braces, walking boots, ankle braces, and more.",
+  description: "Find AULEXMED user manuals by SKU and request the correct manual for knee braces, walking boots, ankle braces, and more.",
   path: "/support/manuals"
 });
 
@@ -20,7 +20,7 @@ export default function ManualsPage() {
           <p className="eyebrow mt-6">Manuals</p>
           <h1 className="mt-3 text-4xl font-bold text-brand-navy">User manual download center</h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-            Match the SKU on your product, package, or instruction card. Approved PDFs can be added here as final files become ready.
+            Match the SKU on your product, package, or instruction card. If your file is not listed, request the correct manual from support.
           </p>
         </div>
       </section>
