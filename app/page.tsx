@@ -1,220 +1,222 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CategorySection } from "@/components/CategorySection";
-import { CTASection } from "@/components/CTASection";
-import { ProductCard } from "@/components/ProductCard";
-import { b2bPaths } from "@/data/b2b";
-import { guides } from "@/data/guides";
-import { homeBrandValues, homePlatformSystems, homeTrustStats, homeUserJourneys } from "@/data/home";
-import { products } from "@/data/products";
-import { supportTopics } from "@/data/support";
-import { siteConfig, buildMetadata } from "@/lib/site";
+import { categories } from "@/data/categories";
+import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
   title: "AULEXMED | Back to Life. One Step at a Time.",
-  description: siteConfig.description
+  description:
+    "AULEXMED is an international orthopedic rehabilitation brand helping people return to everyday life with confidence, support, and clear product guidance."
 });
+
+const supportEntries = [
+  { title: "User Manuals", href: "/support/manuals", body: "Find SKU-based product guidance." },
+  { title: "Size Guide", href: "/support/size-guide", body: "Measure before choosing support." },
+  { title: "Contact Support", href: "/support/contact-support", body: "Get help with product questions." }
+];
+
+const featuredProducts = [
+  {
+    sku: "BL-52036",
+    title: "Walking Boot 52036",
+    body: "A short air walking boot for confident daily movement.",
+    image: "/catalog/52036.jpg",
+    href: "/products/walking-boots/bl-52036-short-air-walking-boot"
+  },
+  {
+    sku: "BL-42001",
+    title: "ROM Knee Brace 42001",
+    body: "Structured knee support for controlled rehabilitation training.",
+    image: "/catalog/42001.jpg",
+    href: "/products/knee-braces/bl-42001-adjustable-rom-knee-brace"
+  },
+  {
+    sku: "BL-42008",
+    title: "Knee Brace 42008",
+    body: "Everyday knee support with a stable, adjustable fit.",
+    image: "/catalog/42008.jpg",
+    href: "/products/knee-braces/bl-42008-knee-stabilizer-brace"
+  }
+];
+
+const trustMetrics = [
+  "20+ years manufacturing experience",
+  "2,550 m² production facility",
+  "180,000+ units monthly capacity",
+  "OEM / ODM cooperation"
+];
+
+const certifications = [
+  {
+    title: "CE",
+    body: "European market compliance preparation for qualified product and business review."
+  },
+  {
+    title: "FDA",
+    body: "Documentation readiness for buyers evaluating U.S. market requirements."
+  },
+  {
+    title: "EUDAMED",
+    body: "Traceability and regulatory readiness for European medical device conversations."
+  },
+  {
+    title: "ISO 13485",
+    body: "Quality management practices for medical device manufacturing and repeatable production."
+  }
+];
 
 export default function HomePage() {
   return (
     <>
-      <section className="overflow-hidden bg-white">
-        <div className="container-page grid gap-10 py-12 lg:min-h-[720px] lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-16">
-          <div className="relative z-10">
+      <section className="relative isolate min-h-[calc(100vh-122px)] overflow-hidden bg-white">
+        <Image
+          src="/brand/homepage-hero-52036.png"
+          alt="AULEXMED Walking Boot 52036 supporting a confident return to daily life"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[62%_center]"
+        />
+        <div className="absolute inset-0 bg-white/78 sm:bg-gradient-to-r sm:from-white sm:via-white/82 sm:to-white/8" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-white/0" />
+
+        <div className="container-page relative flex min-h-[calc(100vh-122px)] items-center py-20 sm:py-24 lg:py-28">
+          <div className="max-w-2xl">
             <p className="eyebrow">AULEXMED Official Brand</p>
-            <h1 className="mt-4 max-w-4xl text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-5xl font-bold tracking-tight text-brand-navy sm:text-6xl lg:text-7xl">
               Back to Life. One Step at a Time.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              Recovery is not only about healing. It is about returning to the life you love. AULEXMED builds practical orthopedic support for everyday confidence, movement, and progress.
+            <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
+              We build more than orthopedic support. We build confidence for every journey back to everyday movement, work, family, and life.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/products/walking-boots/bl-52036-short-air-walking-boot" className="rounded-md bg-brand-blue px-6 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-navy">
-                View Walking Boot 52036
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/products" className="rounded-md bg-brand-blue px-7 py-3.5 text-center text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-navy">
+                Explore Support Products
               </Link>
-              <Link href="/products" className="rounded-md border border-brand-line px-6 py-3 text-center text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:border-brand-blue">
-                Explore Products
-              </Link>
-              <Link href="/support" className="rounded-md border border-brand-line px-6 py-3 text-center text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:border-brand-blue">
-                Visit Support Center
+              <Link href="/support" className="rounded-md border border-brand-line bg-white/80 px-7 py-3.5 text-center text-sm font-semibold text-brand-navy backdrop-blur transition hover:-translate-y-0.5 hover:border-brand-blue">
+                Get Product Support
               </Link>
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              {homeTrustStats.map((stat) => (
-                <div key={stat} className="rounded-md border border-brand-line bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm">
-                  {stat}
-                </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20 sm:py-24">
+        <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <p className="eyebrow">Support First</p>
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">
+              Clear help after every purchase.
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600">
+              Product owners often arrive from package cards, marketplace orders, or sizing questions. The support center gives them a direct path without noise.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {supportEntries.map((entry) => (
+              <Link key={entry.title} href={entry.href} className="group rounded-lg border border-brand-line bg-slate-50 p-5 transition hover:-translate-y-1 hover:border-brand-blue hover:bg-white hover:shadow-soft">
+                <h3 className="text-base font-bold text-brand-navy">{entry.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{entry.body}</p>
+                <span className="mt-5 inline-flex text-sm font-semibold text-brand-blue">Open</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-24 sm:py-28">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <p className="eyebrow">Orthopedic Support</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+              Products are the bridge. Life is the destination.
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="relative min-h-[420px] overflow-hidden rounded-lg bg-white shadow-soft">
+              <Image
+                src="/brand/homepage-rehab-42001.png"
+                alt="AULEXMED ROM Knee Brace 42001 used during rehabilitation training"
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="grid gap-4">
+              {featuredProducts.map((product) => (
+                <Link key={product.sku} href={product.href} className="grid grid-cols-[112px_1fr] gap-5 rounded-lg border border-brand-line bg-white p-4 transition hover:-translate-y-1 hover:border-brand-blue hover:shadow-soft">
+                  <div className="relative aspect-square rounded-md bg-slate-50">
+                    <Image src={product.image} alt={product.title} fill sizes="112px" className="object-contain p-4" />
+                  </div>
+                  <div className="self-center">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">{product.sku}</p>
+                    <h3 className="mt-2 text-lg font-bold text-brand-navy">{product.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{product.body}</p>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
-          <div className="relative min-h-[390px] overflow-hidden rounded-lg bg-brand-sky shadow-soft lg:min-h-[590px]">
-            <Image
-              src="/brand/back-to-life-hero.png"
-              alt="AULEXMED walking boot supporting a confident return to daily life"
-              fill
-              priority
-              sizes="(min-width: 1024px) 52vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-white/90 to-white/0" />
-            <div className="absolute inset-x-4 bottom-4 max-w-md rounded-lg border border-white/70 bg-white/90 p-5 shadow-sm backdrop-blur">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">Every Step Is Progress</p>
-              <p className="mt-2 text-sm font-semibold leading-6 text-brand-navy">
-                Walking Boot 52036 appears as part of a larger story: helping people move back into everyday routines with confidence.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="section-y bg-slate-50">
-        <div className="container-page">
-          <p className="eyebrow">Brand Journey</p>
-          <h2 className="mt-3 max-w-4xl text-3xl font-bold text-brand-navy md:text-4xl">
-            From first product question to long-term support, every path should feel clear.
-          </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {homeUserJourneys.map((journey) => (
-              <Link key={journey.title} href={journey.href} className="rounded-lg border border-brand-line bg-white p-6 transition hover:-translate-y-1 hover:border-brand-blue hover:shadow-soft">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">{journey.label}</p>
-                <h3 className="mt-3 text-xl font-bold text-brand-navy">{journey.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{journey.body}</p>
-                <span className="mt-5 inline-flex text-sm font-semibold text-brand-blue">{journey.cta}</span>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {categories.slice(0, 5).map((category) => (
+              <Link key={category.slug} href={`/products/${category.slug}`} className="rounded-full border border-brand-line bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition hover:border-brand-blue hover:text-brand-blue">
+                {category.name}
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <CategorySection />
-
-      <section className="section-y bg-white">
-        <div className="container-page">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="eyebrow">Featured Products</p>
-              <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Orthopedic support products for everyday movement</h2>
-            </div>
-            <Link href="/products" className="text-sm font-semibold text-brand-blue hover:text-brand-navy">
-              Browse catalog
-            </Link>
-          </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {products.slice(0, 4).map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-slate-50">
-        <div className="container-page">
-          <p className="eyebrow">Official Website</p>
-          <h2 className="mt-3 max-w-4xl text-3xl font-bold text-brand-navy md:text-4xl">
-            One place for brand trust, product guidance, support resources, and business cooperation.
-          </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {homePlatformSystems.map((system) => (
-              <Link key={system.title} href={system.href} className="rounded-lg border border-brand-line bg-white p-6 transition hover:-translate-y-1 hover:border-brand-blue hover:shadow-soft">
-                <h3 className="text-xl font-bold text-brand-navy">{system.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{system.body}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-white">
-        <div className="container-page grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <section className="bg-white py-24 sm:py-28">
+        <div className="container-page grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
-            <p className="eyebrow">Support Center</p>
-            <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">Support that continues after purchase.</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
-              Manuals, warranty information, size guidance, wearing steps, video tutorials, and contact paths help customers get clear answers faster.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {supportTopics.slice(0, 4).map((topic) => (
-              <Link key={topic.href} href={topic.href} className="rounded-lg border border-brand-line bg-slate-50 p-5 hover:border-brand-blue">
-                <h3 className="font-semibold text-brand-navy">{topic.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{topic.body}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-slate-50">
-        <div className="container-page">
-          <p className="eyebrow">Guides & SEO</p>
-          <h2 className="mt-3 max-w-4xl text-3xl font-bold text-brand-navy md:text-4xl">
-            Useful education content helps customers choose support products with confidence.
-          </h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {guides.map((guide) => (
-              <Link key={guide.slug} href={`/guides/${guide.slug}`} className="rounded-lg border border-brand-line bg-white p-6 hover:border-brand-blue">
-                <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">{guide.category}</p>
-                <h3 className="mt-3 text-xl font-bold text-brand-navy">{guide.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{guide.excerpt}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-white">
-        <div className="container-page grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="eyebrow">B2B Center</p>
-            <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">International buyers need a manufacturer-level view.</h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
-              Wholesale, OEM / ODM, distributor, catalog, compliance, and RFQ paths help business buyers evaluate AULEXMED as a long-term orthopedic support partner.
-            </p>
-            <Link href="/b2b" className="mt-6 inline-flex rounded-md bg-brand-blue px-5 py-3 text-sm font-semibold text-white hover:bg-brand-navy">
-              Open B2B Center
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {b2bPaths.map((path) => (
-              <Link key={path.href} href={path.href} className="rounded-lg border border-brand-line bg-slate-50 p-5 hover:border-brand-blue">
-                <h3 className="font-semibold text-brand-navy">{path.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{path.body}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-slate-50">
-        <div className="container-page grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="eyebrow">Brand Manifesto</p>
-            <h2 className="mt-3 text-3xl font-bold text-brand-navy md:text-4xl">
-              We build more than orthopedic support.
+            <p className="eyebrow">Manufacturer Trust</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-brand-navy sm:text-5xl">
+              Built for product owners, distributors, and international buyers.
             </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600">
-              We build confidence for every journey back to life. Products are the bridge between injury and everyday routines, not the destination.
+            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600">
+              AULEXMED combines orthopedic product development, manufacturing capability, support documentation, and OEM / ODM cooperation in one long-term brand platform.
             </p>
+            <Link href="/b2b" className="mt-8 inline-flex rounded-md bg-brand-navy px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-blue">
+              View Manufacturer Capability
+            </Link>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {homeBrandValues.map((value) => (
-              <div key={value} className="rounded-lg border border-brand-line bg-white p-5 text-sm font-semibold leading-6 text-brand-navy shadow-sm">
-                {value}
+          <div className="grid gap-4 sm:grid-cols-2">
+            {trustMetrics.map((metric) => (
+              <div key={metric} className="rounded-lg border border-brand-line bg-slate-50 p-6">
+                <p className="text-lg font-bold text-brand-navy">{metric}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <CTASection
-        eyebrow="AULEXMED"
-        title="Find the right support for your next step."
-        body="Explore product categories, get help from the support center, or contact the AULEXMED team for wholesale and OEM / ODM cooperation."
-        primaryHref="/products"
-        primaryLabel="Explore Products"
-        secondaryHref="/b2b/request-quotation"
-        secondaryLabel="Request a Quote"
-      />
+      <section className="bg-brand-navy py-24 text-white sm:py-28">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">Certifications</p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+              Trust signals for global rehabilitation markets.
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {certifications.map((item) => (
+              <article key={item.title} className="rounded-lg border border-white/15 bg-white/[0.06] p-6 backdrop-blur">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sm font-bold text-brand-navy">
+                  {item.title.slice(0, 2)}
+                </div>
+                <h3 className="mt-6 text-xl font-bold">{item.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-slate-200">{item.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-12 max-w-3xl border-t border-white/15 pt-8 text-2xl font-semibold leading-10 text-slate-100">
+            AULEXMED builds confidence for every journey back to life.
+          </div>
+        </div>
+      </section>
     </>
   );
 }
