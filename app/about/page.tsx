@@ -82,7 +82,7 @@ const certifications = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <>
       <section className="relative isolate min-h-[calc(100vh-122px)] overflow-hidden bg-white">
         <Image
           src="/brand/about-return-to-life-v1.png"
@@ -274,6 +274,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }
