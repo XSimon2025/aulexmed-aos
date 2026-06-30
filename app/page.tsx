@@ -11,23 +11,23 @@ export const metadata = buildMetadata({
 const trustItems = [
   {
     label: "CE",
-    title: "European market readiness.",
-    detail: "A visual trust signal for EU-focused product compliance."
+    title: "CE Mark",
+    detail: "European market readiness."
   },
   {
     label: "EUDAMED",
-    title: "EU database alignment.",
-    detail: "Built for the documentation needs of medical device markets."
+    title: "EUDAMED",
+    detail: "EU medical device database alignment."
   },
   {
     label: "FDA",
-    title: "U.S. registration pathway.",
-    detail: "Presented as registration support, not endorsement."
+    title: "FDA Registration",
+    detail: "U.S. market registration pathway."
   },
   {
     label: "ISO 13485",
-    title: "Quality management system.",
-    detail: "Manufacturer discipline for medical device production."
+    title: "ISO 13485",
+    detail: "Medical device quality management system."
   }
 ];
 
@@ -63,11 +63,11 @@ export default function HomePage() {
             <p className="mt-7 max-w-xl text-xl leading-9 text-slate-600">
               Recovery is not only about healing. It is about returning to the life you love.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="/products/walking-boots" className="rounded-md bg-brand-blue px-7 py-3.5 text-center text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-brand-navy">
+            <div className="mt-10 flex flex-col gap-3.5 sm:flex-row sm:gap-4">
+              <Link href="/products/walking-boots" className="btn-premium btn-premium-primary px-7 py-3.5">
                 Explore Walking Boots
               </Link>
-              <Link href="/products/knee-braces" className="rounded-md border border-brand-line bg-white/82 px-7 py-3.5 text-center text-sm font-semibold text-brand-navy backdrop-blur transition hover:-translate-y-0.5 hover:border-brand-blue">
+              <Link href="/products/knee-braces" className="btn-premium btn-premium-secondary px-7 py-3.5">
                 Explore Knee Support
               </Link>
             </div>
@@ -85,11 +85,11 @@ export default function HomePage() {
             <p className="mt-7 max-w-xl text-lg leading-8 text-slate-600">
               Real support, real movement, and a closer look at how AULEXMED products are worn in daily use.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a href="https://www.youtube.com/watch?v=Wbu6YEePxbc" className="rounded-md bg-brand-blue px-6 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-navy">
+            <div className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:gap-4">
+              <a href="https://www.youtube.com/watch?v=Wbu6YEePxbc" className="btn-premium btn-premium-primary">
                 Watch on YouTube
               </a>
-              <a href="https://www.youtube.com/@aulexmed" className="rounded-md border border-brand-line bg-white px-6 py-3 text-center text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:border-brand-blue">
+              <a href="https://www.youtube.com/@aulexmed" className="btn-premium btn-premium-secondary">
                 Visit YouTube Channel
               </a>
             </div>
@@ -136,7 +136,7 @@ export default function HomePage() {
             <p className="mt-7 text-xl leading-9 text-slate-600">
               Designed for ankle protection and everyday movement, helping each step feel steadier on the way back to daily life.
             </p>
-            <Link href="/products/walking-boots" className="mt-10 inline-flex rounded-md border border-brand-line bg-white px-7 py-3.5 text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:border-brand-blue">
+            <Link href="/products/walking-boots" className="btn-premium btn-premium-secondary mt-10 px-7 py-3.5">
               Explore Walking Boots
             </Link>
           </div>
@@ -154,7 +154,7 @@ export default function HomePage() {
             <p className="mt-7 text-xl leading-9 text-slate-600">
               Adjustable knee support designed for stability, protection and confidence through every stage of movement.
             </p>
-            <Link href="/products/knee-braces" className="mt-10 inline-flex rounded-md border border-brand-line bg-white px-7 py-3.5 text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:border-brand-blue">
+            <Link href="/products/knee-braces" className="btn-premium btn-premium-secondary mt-10 px-7 py-3.5">
               Explore Knee Braces
             </Link>
           </div>
@@ -173,22 +173,31 @@ export default function HomePage() {
       <section className="bg-[#f7fbfd] py-20 sm:py-28">
         <div className="container-page">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow">Quality. Compliance. Confidence.</p>
+            <p className="eyebrow">QUALITY. COMPLIANCE. CONFIDENCE.</p>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-              Built for professional orthopedic support markets.
+              Built for trusted orthopedic support markets.
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-4 lg:grid-cols-4">
+          <div className="mt-12 overflow-hidden rounded-xl bg-white/72 shadow-[0_20px_60px_rgba(18,50,74,0.08)] ring-1 ring-brand-line/70 backdrop-blur">
+            <div className="grid lg:grid-cols-4">
             {trustItems.map((item) => (
-              <div key={item.label} className="rounded-lg bg-white/86 p-7 shadow-[0_18px_50px_rgba(18,50,74,0.07)] ring-1 ring-brand-line/70">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-sky text-sm font-bold text-brand-blue">
-                  {item.label}
+              <div key={item.label} className="group relative min-h-[178px] p-7 transition duration-200 hover:bg-white lg:border-r lg:border-brand-line/70 lg:last:border-r-0">
+                <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-brand-blue/25 to-transparent lg:hidden" />
+                <div className="flex items-start gap-5">
+                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-brand-sky text-[11px] font-bold uppercase tracking-wide text-brand-blue ring-1 ring-brand-blue/15 transition group-hover:bg-white group-hover:ring-brand-blue/30">
+                    <span className="absolute inset-x-3 top-3 h-px bg-brand-blue/25" />
+                    <span className="absolute inset-x-3 bottom-3 h-px bg-brand-blue/20" />
+                    <span className="relative text-center leading-tight">{item.label}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-brand-navy">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">{item.detail}</p>
+                  </div>
                 </div>
-                <h3 className="mt-6 text-lg font-bold text-brand-navy">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{item.detail}</p>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>
@@ -204,7 +213,7 @@ export default function HomePage() {
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {supportLinks.map((entry) => (
-              <Link key={entry.title} href={entry.href} className="rounded-md bg-slate-50 px-6 py-5 text-base font-semibold text-brand-navy ring-1 ring-brand-line transition hover:-translate-y-0.5 hover:bg-white hover:ring-brand-blue hover:shadow-soft">
+              <Link key={entry.title} href={entry.href} className="rounded-xl bg-slate-50 px-6 py-5 text-base font-semibold text-brand-navy ring-1 ring-brand-line/80 transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:ring-brand-blue/35 hover:shadow-[0_12px_28px_rgba(18,50,74,0.08)]">
                 {entry.title}
               </Link>
             ))}

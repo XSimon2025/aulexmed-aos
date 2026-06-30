@@ -37,7 +37,7 @@ export function Header() {
           <LanguageSelector />
           <Link
             href="/b2b#request-quotation"
-            className="rounded-md bg-brand-blue px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-navy"
+            className="btn-premium btn-premium-primary btn-premium-compact"
           >
             Request Quote
           </Link>
