@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import {
   buildFallbackAnswer,
   createOrUpdateChatSession,
+  detectIntent,
+  detectLanguage,
   formatKnowledgeForPrompt,
   needsHumanFollowUp,
   type RetrievedKnowledge,
+  type RetrievalDebugInfo,
   retrieveSupportKnowledge,
   storeChatMessage
 } from "@/lib/supportChat";
@@ -15,6 +18,7 @@ type ChatRequest = {
   message?: string;
   sessionId?: string;
   pageUrl?: string;
+  debug?: boolean;
 };
 
 type DeepSeekResponse = {
@@ -34,22 +38,45 @@ function getClientIp(request: Request) {
   return request.headers.get("x-real-ip") ?? undefined;
 }
 
-function getSafeSupportSystemPrompt(knowledgeText: string) {
+function getSafeSupportSystemPrompt({
+  knowledgeText,
+  language,
+  intent
+}: {
+  knowledgeText: string;
+  language: string;
+  intent: string;
+}) {
   return [
     "You are AULEXMED after-sales support.",
-    "You must answer primarily from the AULEXMED support knowledge provided below.",
+    "Use AULEXMED support knowledge as the primary source of truth when it is provided.",
+    "If the knowledge is partial, give a safe helpful answer and ask only for the minimum missing information.",
+    "Do not immediately send every customer to email support.",
     "Do not invent product details, warranty promises, refund promises, replacement promises, or medical claims.",
     "Avoid diagnosis and medical treatment advice. If the user asks for medical advice, tell them to consult a healthcare professional.",
     "Use a polite, professional, simple, customer-friendly tone.",
     "If information is missing, ask for the minimum necessary details such as product model, order number, purchase platform, photo, or short video.",
-    "If the retrieved knowledge does not answer the question, say that support should review it rather than guessing.",
+    "For B2B, wholesale, OEM/ODM, distributor, catalog, certification, or quote questions, route toward sales/contact/quotation and ask for company, country, product category, estimated quantity, and channel.",
+    "Reply in the user's language. If the language is unclear, reply in simple English.",
+    `Detected language: ${language}`,
+    `Detected intent: ${intent}`,
     "",
     "AULEXMED support knowledge:",
-    knowledgeText
+    knowledgeText || "No specific knowledge match was found. Answer safely and ask for the minimum details needed."
   ].join("\n");
 }
 
-async function askDeepSeek(question: string, knowledgeText: string) {
+async function askDeepSeek({
+  question,
+  knowledgeText,
+  language,
+  intent
+}: {
+  question: string;
+  knowledgeText: string;
+  language: string;
+  intent: string;
+}) {
   const apiKey = process.env.DEEPSEEK_API_KEY;
   const model = process.env.DEEPSEEK_MODEL || "deepseek-v4-pro";
 
@@ -68,7 +95,7 @@ async function askDeepSeek(question: string, knowledgeText: string) {
       messages: [
         {
           role: "system",
-          content: getSafeSupportSystemPrompt(knowledgeText)
+          content: getSafeSupportSystemPrompt({ knowledgeText, language, intent })
         },
         {
           role: "user",
@@ -112,38 +139,68 @@ export async function POST(request: Request) {
   const visitorIp = getClientIp(request);
   const country = request.headers.get("x-vercel-ip-country") || undefined;
   const userAgent = request.headers.get("user-agent") || undefined;
+  const language = detectLanguage(message);
+  const intent = detectIntent(message);
 
   let knowledge: RetrievedKnowledge[] = [];
+  let retrievalDebug: RetrievalDebugInfo = {
+    supabaseConfigured: false,
+    fetchedRows: 0,
+    matchedRows: 0,
+    topMatches: []
+  };
 
   try {
-    knowledge = await retrieveSupportKnowledge(message);
+    const retrieval = await retrieveSupportKnowledge(message, intent);
+    knowledge = retrieval.knowledge;
+    retrievalDebug = retrieval.debug;
   } catch (error) {
     console.error("AULEXMED knowledge retrieval failed", error);
   }
 
-  const supportCategory = knowledge[0]?.category;
+  const supportCategory = intent === "business_inquiry" ? "B2B Inquiry" : knowledge[0]?.category;
   const humanFollowUpRequired = needsHumanFollowUp(message, knowledge);
   const retrievedKnowledgeIds = knowledge.map((item) => item.id);
 
-  let answer = buildFallbackAnswer();
+  let answer = buildFallbackAnswer(language, intent);
   let source: "supabase_deepseek" | "supabase_template" | "fallback" = "fallback";
+  const knowledgeText = knowledge.length > 0 ? formatKnowledgeForPrompt(knowledge) : "";
 
-  if (knowledge.length > 0) {
-    const knowledgeText = formatKnowledgeForPrompt(knowledge);
-
+  if (knowledge.length > 0 || intent === "business_inquiry" || intent === "medical_advice" || intent === "general_support") {
     try {
-      const deepSeekAnswer = await askDeepSeek(message, knowledgeText);
+      const deepSeekAnswer = await askDeepSeek({
+        question: message,
+        knowledgeText,
+        language,
+        intent
+      });
       if (deepSeekAnswer) {
         answer = deepSeekAnswer;
-        source = "supabase_deepseek";
-      } else {
-        answer = knowledge[0].reply_template_en || buildFallbackAnswer();
+        source = knowledge.length > 0 ? "supabase_deepseek" : "fallback";
+      } else if (knowledge.length > 0) {
+        answer = knowledge[0].reply_template_en || buildFallbackAnswer(language, intent);
         source = "supabase_template";
       }
     } catch (error) {
       console.error("AULEXMED DeepSeek request failed", error);
-      answer = knowledge[0].reply_template_en || buildFallbackAnswer();
+      if (knowledge.length > 0) {
+        answer = knowledge[0].reply_template_en || buildFallbackAnswer(language, intent);
+        source = "supabase_template";
+      }
     }
+  }
+
+  if (process.env.AULEXMED_CHAT_DEBUG === "true") {
+    console.info("AULEXMED chat retrieval", {
+      messagePreview: message.slice(0, 160),
+      language,
+      intent,
+      fetchedRows: retrievalDebug.fetchedRows,
+      matchedRows: retrievalDebug.matchedRows,
+      topMatches: retrievalDebug.topMatches,
+      contextPassedToDeepSeek: knowledgeText.length > 0,
+      source
+    });
   }
 
   let sessionId = body.sessionId;
@@ -174,7 +231,9 @@ export async function POST(request: Request) {
         metadata: {
           pageUrl,
           country,
-          source: "website_chatbot"
+          source: "website_chatbot",
+          language,
+          intent
         }
       });
       await storeChatMessage({
@@ -187,6 +246,9 @@ export async function POST(request: Request) {
         metadata: {
           source,
           model: process.env.DEEPSEEK_MODEL || "deepseek-v4-pro",
+          language,
+          intent,
+          contextPassedToDeepSeek: knowledgeText.length > 0,
           knowledgeMatches: knowledge.map((item) => ({
             id: item.id,
             category: item.category,
@@ -205,7 +267,22 @@ export async function POST(request: Request) {
     sessionId,
     source,
     supportCategory,
+    language,
+    intent,
     humanFollowUpRequired,
-    retrievedKnowledgeCount: knowledge.length
+    retrievedKnowledgeCount: knowledge.length,
+    debug:
+      body.debug && process.env.AULEXMED_CHAT_DEBUG === "true"
+        ? {
+            retrieval: retrievalDebug,
+            contextPassedToDeepSeek: knowledgeText.length > 0,
+            fallbackReason:
+              source === "fallback"
+                ? knowledge.length === 0
+                  ? "no_useful_knowledge_match_or_missing_model_response"
+                  : "model_unavailable"
+                : null
+          }
+        : undefined
   });
 }
