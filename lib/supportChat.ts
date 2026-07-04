@@ -28,7 +28,7 @@ export type RetrievedKnowledge = SupportKnowledgeItem & {
 
 type SupabaseConfig = {
   url: string;
-  serviceRoleKey: string;
+  apiKey: string;
 };
 
 export type ChatStorageInput = {
@@ -46,15 +46,20 @@ export type StoredChatSession = {
 
 function getSupabaseConfig(): SupabaseConfig | null {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const apiKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-  if (!url || !serviceRoleKey) {
+  if (!url || !apiKey) {
     return null;
   }
 
   return {
     url: url.replace(/\/$/, ""),
-    serviceRoleKey
+    apiKey
   };
 }
 
@@ -68,8 +73,8 @@ async function supabaseRequest<T>(path: string, init: RequestInit = {}): Promise
   const response = await fetch(`${config.url}/rest/v1/${path}`, {
     ...init,
     headers: {
-      apikey: config.serviceRoleKey,
-      Authorization: `Bearer ${config.serviceRoleKey}`,
+      apikey: config.apiKey,
+      Authorization: `Bearer ${config.apiKey}`,
       "Content-Type": "application/json",
       ...(init.headers ?? {})
     },
