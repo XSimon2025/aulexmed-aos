@@ -16,8 +16,11 @@ Last updated: 2026-07-06
 - Destination address added: `invosen.achao@gmail.com`
 - Destination verification status: `verified`
 - Routing addresses status: created and enabled in Cloudflare
+- Old Hostinger mail DNS records: removed from Cloudflare DNS after backup
+- Cloudflare Email Routing DNS records: added manually in Cloudflare DNS
+- Remaining blocker: Cloudflare zone is still `pending`; the domain must use Cloudflare nameservers before Cloudflare Email Routing can become active
 
-Cloudflare routing rules are configured, but inbound mail will not fully use Cloudflare Email Routing until the domain's email DNS records are switched from the old Hostinger mail records to Cloudflare Email Routing records.
+Cloudflare routing rules and DNS records are configured inside Cloudflare, but inbound mail will not fully use Cloudflare Email Routing until `aulexmed.com` is active on Cloudflare nameservers.
 
 ## Receiving Addresses
 
@@ -40,7 +43,7 @@ Do not modify existing website DNS records for:
 - `www.aulexmed.com`
 - Vercel-related website records, if present later
 
-During setup, old Hostinger mail-related DNS records were found and should be treated as email-routing conflicts before Cloudflare Email Routing is activated:
+During setup, old Hostinger mail-related DNS records were found and removed after backup:
 
 - `MX aulexmed.com -> mx1.hostinger.com`
 - `MX aulexmed.com -> mx2.hostinger.com`
@@ -51,9 +54,9 @@ During setup, old Hostinger mail-related DNS records were found and should be tr
 - `CNAME hostingermail-b._domainkey.aulexmed.com -> hostingermail-b.dkim.mail.hostinger.com`
 - `CNAME hostingermail-c._domainkey.aulexmed.com -> hostingermail-c.dkim.mail.hostinger.com`
 
-Cloudflare Email Routing expects Cloudflare MX records and Cloudflare SPF/DKIM TXT records. These should only replace old Hostinger mail records after confirming Hostinger mail is no longer needed for receiving mail.
+The removed records are backed up in `HOSTINGER_MAIL_DNS_BACKUP.md`.
 
-Observed Cloudflare Email Routing DNS requirements:
+Configured Cloudflare Email Routing DNS records:
 
 - `MX aulexmed.com -> route1.mx.cloudflare.net`
 - `MX aulexmed.com -> route2.mx.cloudflare.net`
@@ -80,7 +83,9 @@ NOREPLY_EMAIL=noreply@aulexmed.com
 
 ## Next Steps
 
-1. Confirm that old Hostinger mail receiving is no longer needed.
-2. Replace Hostinger mail DNS records with Cloudflare Email Routing DNS records.
+1. Change the domain nameservers at the registrar/current DNS provider from Hostinger DNS to Cloudflare:
+   - `bristol.ns.cloudflare.com`
+   - `skip.ns.cloudflare.com`
+2. Re-check Cloudflare zone status until it becomes active.
 3. Re-check Cloudflare Email Routing status until it reports ready.
 4. Confirm website DNS remains unchanged and working.
