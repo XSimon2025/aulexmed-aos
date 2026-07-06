@@ -14,17 +14,14 @@ Last updated: 2026-07-06
 - Zone status observed during setup: `pending`
 - Cloudflare Email Routing status observed during setup: `unconfigured / disabled`
 - Destination address added: `invosen.achao@gmail.com`
-- Destination verification status observed during setup: `unverified`
+- Destination verification status: `verified`
+- Routing addresses status: created and enabled in Cloudflare
 
-Cloudflare requires verification of the destination address before routing rules can be created.
-
-Action required:
-
-Please verify the Cloudflare Email Routing confirmation email sent to `invosen.achao@gmail.com`.
+Cloudflare routing rules are configured, but inbound mail will not fully use Cloudflare Email Routing until the domain's email DNS records are switched from the old Hostinger mail records to Cloudflare Email Routing records.
 
 ## Receiving Addresses
 
-After destination verification, configure these Cloudflare Email Routing addresses:
+Configured Cloudflare Email Routing addresses:
 
 - `support@aulexmed.com` -> `invosen.achao@gmail.com`
 - `sales@aulexmed.com` -> `invosen.achao@gmail.com`
@@ -54,7 +51,7 @@ During setup, old Hostinger mail-related DNS records were found and should be tr
 - `CNAME hostingermail-b._domainkey.aulexmed.com -> hostingermail-b.dkim.mail.hostinger.com`
 - `CNAME hostingermail-c._domainkey.aulexmed.com -> hostingermail-c.dkim.mail.hostinger.com`
 
-Cloudflare Email Routing expects Cloudflare MX records and Cloudflare SPF/DKIM TXT records. These should only replace old Hostinger mail records after confirming Hostinger mail is no longer needed.
+Cloudflare Email Routing expects Cloudflare MX records and Cloudflare SPF/DKIM TXT records. These should only replace old Hostinger mail records after confirming Hostinger mail is no longer needed for receiving mail.
 
 Observed Cloudflare Email Routing DNS requirements:
 
@@ -83,9 +80,7 @@ NOREPLY_EMAIL=noreply@aulexmed.com
 
 ## Next Steps
 
-1. Verify `invosen.achao@gmail.com` in the Cloudflare confirmation email.
-2. Re-check destination status in Cloudflare.
-3. Create the eight routing addresses listed above.
-4. Resolve old Hostinger mail DNS conflicts only after confirming they are no longer needed.
-5. Enable Cloudflare Email Routing DNS records.
-6. Confirm website DNS remains unchanged and working.
+1. Confirm that old Hostinger mail receiving is no longer needed.
+2. Replace Hostinger mail DNS records with Cloudflare Email Routing DNS records.
+3. Re-check Cloudflare Email Routing status until it reports ready.
+4. Confirm website DNS remains unchanged and working.
