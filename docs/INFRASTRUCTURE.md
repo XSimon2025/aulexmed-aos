@@ -10,7 +10,7 @@ This document records the current infrastructure plan for the AULEXMED official 
 - Canonical website URL in code: `https://www.aulexmed.com`
 - Website hosting: Vercel
 - DNS provider after migration: Cloudflare
-- Current Cloudflare zone status during preparation: `pending`
+- Current Cloudflare zone status: `active`
 - Cloudflare assigned nameservers:
   - `bristol.ns.cloudflare.com`
   - `skip.ns.cloudflare.com`
@@ -57,7 +57,15 @@ Resend is being added as the transactional sending provider. Use only the exact 
 
 Do not remove Cloudflare Email Routing MX records when adding Resend. Cloudflare remains the receiving layer; Resend is the website/system sending layer.
 
-Current status: records are pending. The current local environment could not retrieve the domain-specific records from Resend API, so no Resend DNS records were added yet. Do not guess DKIM or verification values.
+Current status: Resend DNS records are added in Cloudflare and verified in Resend.
+
+| Type | Name | Target / Value | Priority | Purpose |
+| --- | --- | --- | --- | --- |
+| TXT | `resend._domainkey.aulexmed.com` | Resend DKIM value |  | DKIM domain verification |
+| MX | `send.aulexmed.com` | `feedback-smtp.us-east-1.amazonses.com` | `10` | Resend sending feedback / SPF alignment |
+| TXT | `send.aulexmed.com` | `v=spf1 include:amazonses.com ~all` |  | Dedicated sending SPF |
+
+The root domain SPF for Cloudflare Email Routing was not modified.
 
 ## Email Architecture
 
@@ -104,16 +112,16 @@ The real `RESEND_API_KEY` must be stored only in Vercel environment variables or
 ## Cloudflare Configuration
 
 - Zone: `aulexmed.com`
-- Zone status during preparation: `pending`
-- DNS records prepared for Vercel and Cloudflare Email Routing
+- Zone status: `active`
+- DNS records prepared for Vercel, Cloudflare Email Routing, and Resend sending
 - Email Routing rules created for the receiving addresses listed above
-- Email Routing final activation requires the zone to become active after nameserver cutover
+- Email Routing is active and remains the receiving layer.
 
 After changing nameservers, re-check:
 
-1. Cloudflare zone status is `active`.
-2. DNS records are still present.
-3. Email Routing status becomes `ready` or can be enabled.
+1. Cloudflare zone status remains `active`.
+2. Website, Email Routing, and Resend DNS records are still present.
+3. Email Routing remains enabled.
 4. Test mail to `support@aulexmed.com` forwards to `invosen.achao@gmail.com`.
 
 ## Vercel Configuration
@@ -200,7 +208,6 @@ Nameserver cutover:
 
 Post-cutover:
 
-1. Add Resend DNS records when transactional sending is ready.
-2. Add Resend environment variables in Vercel.
-3. Send a test inquiry email from the website after Resend is integrated.
-4. Keep `MAIL_SETUP.md` and this document updated after any DNS, email, or hosting change.
+1. Send a test inquiry email from the website after contact workflows are connected.
+2. Confirm DKIM and SPF pass in the recipient inbox message details.
+3. Keep `MAIL_SETUP.md` and this document updated after any DNS, email, or hosting change.
