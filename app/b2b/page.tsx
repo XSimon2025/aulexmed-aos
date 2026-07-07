@@ -1,14 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { categories } from "@/data/categories";
 import { buildB2BMailto, b2bPaths, rfqChecklist } from "@/data/b2b";
 import { buildMetadata, siteConfig } from "@/lib/site";
 
 export const metadata = buildMetadata({
-  title: "Orthopedic Manufacturing Partner, OEM / ODM, Wholesale",
+  title: "Orthopedic Manufacturer, OEM / ODM, Wholesale Partner",
   description:
-    "AULEXMED B2B manufacturing page for orthopedic support distributors, importers, OEM partners, ODM projects, private label programs, and international compliance review.",
+    "AULEXMED is an orthopedic manufacturer for OEM knee braces, walking boots, ankle support products, ODM projects, private label programs, wholesale partners, and international distributor support.",
   path: "/b2b"
 });
 
@@ -56,7 +55,43 @@ const manufacturingFacts = [
   "Factory-controlled quality process"
 ];
 
+const manufacturingVisuals = [
+  {
+    src: "/brand/b2b-factory/workshop-line.jpg",
+    alt: "AULEXMED orthopedic support production workshop with assembly workstations",
+    title: "Workshop production",
+    body: "Organized workstations for orthopedic support assembly and repeated production planning."
+  },
+  {
+    src: "/brand/b2b-factory/sewing-production.jpg",
+    alt: "AULEXMED sewing production for orthopedic brace components",
+    title: "Sewing and materials",
+    body: "Hands-on sewing work for brace panels, soft goods, straps, and support components."
+  },
+  {
+    src: "/brand/b2b-factory/walking-boot-assembly.jpg",
+    alt: "AULEXMED walking boot assembly and inspection process",
+    title: "Walking boot assembly",
+    body: "Assembly review for walking boots and daily orthopedic support product lines."
+  }
+];
+
 const workflowSteps = ["Design", "Sampling", "Testing", "Production", "Inspection", "Shipping"];
+
+const qualitySteps = [
+  {
+    title: "Material Check",
+    body: "Review incoming soft goods, hardware, shells, and support components before production."
+  },
+  {
+    title: "Production Control",
+    body: "Keep assembly steps visible, repeatable, and aligned with partner requirements."
+  },
+  {
+    title: "Final Inspection",
+    body: "Check product structure, straps, hinges, packaging, and shipment readiness before delivery."
+  }
+];
 
 type ComplianceItem = {
   title: string;
@@ -98,12 +133,6 @@ const complianceItems: ComplianceItem[] = [
   }
 ];
 
-const productLines = categories.map((category) => ({
-  name: category.name,
-  href: `/products/${category.slug}`,
-  image: category.image
-}));
-
 export default function B2BPage() {
   const mailto = buildB2BMailto("AULEXMED B2B Quotation Request", [
     "Company name:",
@@ -128,12 +157,15 @@ export default function B2BPage() {
                 Your Trusted Orthopedic Manufacturing Partner.
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg">
-                From OEM manufacturing to global distribution support, AULEXMED helps orthopedic brands bring reliable
-                medical support products to market with confidence.
+                From OEM development to global distribution support, AULEXMED helps partners build reliable orthopedic
+                product lines with professional manufacturing capability.
               </p>
               <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
                 {partnerTypes.map((type) => (
-                  <span key={type} className="rounded-full border border-white/80 bg-white/80 px-4 py-2 shadow-[0_10px_30px_rgba(15,55,90,0.06)]">
+                  <span
+                    key={type}
+                    className="rounded-full border border-white/80 bg-white/80 px-4 py-2 shadow-[0_10px_30px_rgba(15,55,90,0.06)]"
+                  >
                     {type}
                   </span>
                 ))}
@@ -153,19 +185,19 @@ export default function B2BPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_rgba(19,45,74,0.14)]">
+            <div className="relative min-h-[420px] overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_80px_rgba(19,45,74,0.14)] md:min-h-[520px]">
               <Image
-                src="/brand/about-manufacturing-v1.png"
-                alt="AULEXMED orthopedic manufacturing and quality control workspace"
+                src="/brand/b2b-factory/hero-workshop.jpg"
+                alt="AULEXMED real orthopedic support manufacturing workshop with assembly workers"
                 fill
                 priority
                 sizes="(min-width: 1024px) 52vw, 100vw"
                 className="object-cover"
               />
               <div className="absolute inset-x-5 bottom-5 rounded-3xl border border-white/50 bg-white/[0.82] p-5 shadow-[0_18px_45px_rgba(15,55,90,0.12)] backdrop-blur">
-                <p className="text-xs font-bold uppercase text-brand-blue">Manufacturing partnership</p>
+                <p className="text-xs font-bold uppercase text-brand-blue">Real factory capability</p>
                 <p className="mt-2 text-lg font-semibold text-brand-navy">
-                  Built for partners seeking a long-term orthopedic supply relationship.
+                  Built for partners who need consistent orthopedic manufacturing, QC, and shipment support.
                 </p>
               </div>
             </div>
@@ -199,30 +231,182 @@ export default function B2BPage() {
       </section>
 
       <section className="section-y bg-slate-50">
-        <div className="container-page grid gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
+        <div className="container-page">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="eyebrow">Manufacturing Capability</p>
+              <h2 className="mt-4 text-3xl font-semibold text-brand-navy md:text-5xl">
+                Manufacturing built around quality.
+              </h2>
+            </div>
+            <p className="max-w-3xl text-base leading-8 text-slate-600 lg:justify-self-end">
+              International buyers are not only comparing unit price. They are evaluating consistency, communication,
+              documentation, quality discipline, and whether the factory can support repeated orders over time.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {manufacturingVisuals.map((visual, index) => (
+              <article key={visual.title} className={index === 0 ? "lg:col-span-2" : ""}>
+                <div className="relative min-h-[320px] overflow-hidden rounded-[1.75rem] bg-slate-200 shadow-[0_22px_60px_rgba(15,55,90,0.09)]">
+                  <Image
+                    src={visual.src}
+                    alt={visual.alt}
+                    fill
+                    sizes={index === 0 ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 29vw, 100vw"}
+                    className="object-cover transition duration-700 hover:scale-[1.03]"
+                  />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-brand-navy">{visual.title}</h3>
+                <p className="mt-2 max-w-xl text-sm leading-7 text-slate-600">{visual.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {manufacturingFacts.map((fact) => (
+              <div
+                key={fact}
+                className="rounded-2xl border border-white bg-white px-5 py-4 text-sm font-semibold leading-6 text-brand-navy shadow-[0_12px_32px_rgba(15,55,90,0.05)]"
+              >
+                {fact}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y bg-white">
+        <div className="container-page grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <div>
+            <p className="eyebrow">OEM / ODM Partnership</p>
+            <h2 className="mt-4 text-3xl font-semibold text-brand-navy md:text-5xl">
+              Product programs grounded in real production.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-slate-600">
+              AULEXMED supports partners with existing orthopedic SKUs, product adjustment, private label planning,
+              packaging coordination, user manuals, product cards, and market-ready support content.
+            </p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {b2bPaths.slice(0, 4).map((path) => (
+                <Link
+                  key={path.href}
+                  href={path.href}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_14px_40px_rgba(15,55,90,0.05)] transition hover:-translate-y-1 hover:border-brand-blue/35"
+                >
+                  <h3 className="text-lg font-semibold text-brand-navy">{path.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{path.body}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
           <div className="relative min-h-[460px] overflow-hidden rounded-[2rem] bg-slate-200 shadow-[0_26px_70px_rgba(15,55,90,0.1)]">
             <Image
-              src="/brand/about-manufacturing-v1.png"
-              alt="AULEXMED manufacturing facility quality control and product review"
+              src="/brand/b2b-factory/oem-assembly.jpg"
+              alt="AULEXMED OEM and ODM walking boot assembly in the factory workshop"
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
           </div>
-          <div>
-            <p className="eyebrow">Manufacturing</p>
+        </div>
+      </section>
+
+      <section className="section-y bg-slate-50">
+        <div className="container-page">
+          <div className="max-w-3xl">
+            <p className="eyebrow">Quality Control</p>
             <h2 className="mt-4 text-3xl font-semibold text-brand-navy md:text-5xl">
-              Factory capability, presented for partner confidence.
+              Controlled quality, from materials to final inspection.
             </h2>
             <p className="mt-5 text-base leading-8 text-slate-600">
-              International buyers are not only comparing unit price. They are evaluating consistency, communication,
-              documentation, quality discipline, and whether the factory can support repeated orders over time.
+              Real manufacturing trust comes from visible process control: component review, assembly discipline,
+              inspection details, packaging readiness, and clear communication before shipment.
             </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {manufacturingFacts.map((fact) => (
-                <div key={fact} className="rounded-2xl border border-white bg-white px-5 py-4 text-sm font-semibold leading-6 text-brand-navy shadow-[0_12px_32px_rgba(15,55,90,0.05)]">
-                  {fact}
-                </div>
+          </div>
+          <div className="mt-12 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative min-h-[440px] overflow-hidden rounded-[2rem] bg-slate-200 shadow-[0_26px_70px_rgba(15,55,90,0.1)]">
+              <Image
+                src="/brand/b2b-factory/rom-hinge-qc.jpg"
+                alt="AULEXMED ROM knee brace hinge component inspection and assembly"
+                fill
+                sizes="(min-width: 1024px) 52vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="grid gap-5">
+              <div className="relative min-h-[210px] overflow-hidden rounded-[1.75rem] bg-slate-200 shadow-[0_18px_45px_rgba(15,55,90,0.08)]">
+                <Image
+                  src="/brand/b2b-factory/packing-shipment.jpg"
+                  alt="AULEXMED packaging and shipment preparation in the factory"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="grid gap-3">
+                {qualitySteps.map((step, index) => (
+                  <article
+                    key={step.title}
+                    className="rounded-3xl border border-white bg-white p-5 shadow-[0_12px_32px_rgba(15,55,90,0.05)]"
+                  >
+                    <p className="text-xs font-bold uppercase text-brand-blue">0{index + 1}</p>
+                    <h3 className="mt-2 text-lg font-semibold text-brand-navy">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">{step.body}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-y overflow-hidden bg-brand-navy text-white">
+        <div className="container-page">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
+            <div>
+              <p className="text-xs font-bold uppercase text-blue-200">Quality. Compliance. Confidence.</p>
+              <h2 className="mt-4 text-3xl font-semibold md:text-5xl">
+                Compliance signals for international orthopedic markets.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-blue-100">
+                For distributors, importers, and private label brands, compliance materials help verify manufacturing
+                readiness, documentation discipline, and long-term supplier reliability.
+              </p>
+              <Link
+                href="/certificates"
+                className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:bg-blue-50"
+              >
+                View Certificates
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2">
+              {complianceItems.map((item) => (
+                <article
+                  key={item.title}
+                  className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur"
+                >
+                  <div className="relative h-36 bg-white/95">
+                    {item.visual === "image" && item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.imageAlt ?? `${item.title} preview`}
+                        fill
+                        sizes="(min-width: 768px) 24vw, 100vw"
+                        className="object-cover object-top"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center bg-[radial-gradient(circle_at_top_left,#e6f1ff,#ffffff_58%,#dbeafe)]">
+                        <div className="rounded-2xl border border-brand-blue/20 bg-white px-8 py-5 text-3xl font-semibold text-brand-blue shadow-[0_18px_45px_rgba(15,55,90,0.08)]">
+                          {item.code}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <p className="text-xs font-bold uppercase text-blue-200">{item.code}</p>
+                    <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-blue-100">{item.body}</p>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
@@ -259,108 +443,6 @@ export default function B2BPage() {
         </div>
       </section>
 
-      <section className="section-y overflow-hidden bg-brand-navy text-white">
-        <div className="container-page">
-          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-            <div>
-              <p className="text-xs font-bold uppercase text-blue-200">Quality. Compliance. Confidence.</p>
-              <h2 className="mt-4 text-3xl font-semibold md:text-5xl">
-                Compliance signals for international orthopedic markets.
-              </h2>
-              <p className="mt-5 text-base leading-8 text-blue-100">
-                For distributors, importers, and private label brands, compliance materials help verify manufacturing
-                readiness, documentation discipline, and long-term supplier reliability.
-              </p>
-              <Link
-                href="/certificates"
-                className="mt-8 inline-flex items-center justify-center rounded-full border border-white/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy transition hover:-translate-y-0.5 hover:bg-blue-50"
-              >
-                View Certificates
-              </Link>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2">
-              {complianceItems.map((item) => (
-                <article key={item.title} className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] shadow-[0_24px_70px_rgba(0,0,0,0.18)] backdrop-blur">
-                  <div className="relative h-36 bg-white/95">
-                    {item.visual === "image" && item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt ?? `${item.title} preview`}
-                        fill
-                        sizes="(min-width: 768px) 24vw, 100vw"
-                        className="object-cover object-top"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-[radial-gradient(circle_at_top_left,#e6f1ff,#ffffff_58%,#dbeafe)]">
-                        <div className="rounded-2xl border border-brand-blue/20 bg-white px-8 py-5 text-3xl font-semibold text-brand-blue shadow-[0_18px_45px_rgba(15,55,90,0.08)]">
-                          {item.code}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <p className="text-xs font-bold uppercase text-blue-200">{item.code}</p>
-                    <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-blue-100">{item.body}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-white">
-        <div className="container-page">
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="eyebrow">Product Lines</p>
-              <h2 className="mt-4 text-3xl font-semibold text-brand-navy md:text-5xl">
-                Orthopedic categories ready for partner programs.
-              </h2>
-            </div>
-            <Link href="/products" className="text-sm font-semibold text-brand-blue transition hover:text-brand-navy">
-              View product catalog
-            </Link>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {productLines.map((line) => (
-              <Link
-                key={line.name}
-                href={line.href}
-                className="group rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_14px_40px_rgba(15,55,90,0.04)] transition hover:-translate-y-1 hover:border-brand-blue/40"
-              >
-                <div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-50">
-                  <Image src={line.image} alt={`${line.name} category for B2B orthopedic programs`} fill sizes="20vw" className="object-contain p-5 transition group-hover:scale-105" />
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-brand-navy">{line.name}</h3>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-slate-50">
-        <div className="container-page">
-          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
-            <div>
-              <p className="eyebrow">Cooperation Path</p>
-              <h2 className="mt-4 text-3xl font-semibold text-brand-navy md:text-5xl">
-                Choose the partnership model that matches your market.
-              </h2>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              {b2bPaths.map((path) => (
-                <Link key={path.href} href={path.href} className="rounded-3xl border border-white bg-white p-6 shadow-[0_14px_40px_rgba(15,55,90,0.05)] transition hover:-translate-y-1 hover:border-brand-blue/35">
-                  <h3 className="text-lg font-semibold text-brand-navy">{path.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{path.body}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section id="request-quotation" className="section-y bg-white">
         <div className="container-page overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#0e2f55_0%,#184e83_52%,#2f7bd8_100%)] p-6 text-white shadow-[0_30px_90px_rgba(15,55,90,0.2)] md:p-12">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
@@ -385,6 +467,12 @@ export default function B2BPage() {
                   className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10"
                 >
                   Become a Distributor
+                </Link>
+                <Link
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/10"
+                >
+                  Contact Business Team
                 </Link>
               </div>
             </div>
