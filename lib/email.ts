@@ -4,6 +4,7 @@ import {
   chatbotEscalationTemplate,
   generalContactTemplate,
   quoteRequestTemplate,
+  renderAulexmedEmail,
   supportRequestTemplate,
   type EmailField
 } from "@/lib/emailTemplates";
@@ -21,6 +22,7 @@ type ResendSendInput = {
   subject: string;
   html: string;
   replyTo?: string;
+  from?: string;
 };
 
 export type EmailSendResult =
@@ -97,6 +99,14 @@ function getMailFrom() {
   return getEnv("MAIL_FROM", "AULEXMED <noreply@aulexmed.com>");
 }
 
+function getSupportMailFrom() {
+  return getEnv("MAIL_FROM_SUPPORT", `AULEXMED Support <${getEmailAddress("support")}>`);
+}
+
+function getBusinessMailFrom() {
+  return getEnv("MAIL_FROM_BUSINESS", `AULEXMED Business <${getEmailAddress("business")}>`);
+}
+
 function getResendApiKey() {
   return process.env.RESEND_API_KEY || "";
 }
@@ -117,7 +127,7 @@ function normalizeFields(input: InquiryEmailInput): EmailField[] {
   ];
 }
 
-async function sendViaResend({ to, subject, html, replyTo }: ResendSendInput): Promise<EmailSendResult> {
+async function sendViaResend({ to, subject, html, replyTo, from }: ResendSendInput): Promise<EmailSendResult> {
   const apiKey = getResendApiKey();
 
   if (!apiKey) {
@@ -137,7 +147,7 @@ async function sendViaResend({ to, subject, html, replyTo }: ResendSendInput): P
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: getMailFrom(),
+        from: from || getMailFrom(),
         to,
         subject,
         html,
@@ -236,5 +246,34 @@ export async function sendChatbotEscalationEmail(input: ChatbotEscalationInput) 
       ],
       [`User message:\n${input.userMessage || "Not provided"}`, `Assistant answer:\n${input.assistantAnswer || "Not provided"}`].join("\n\n")
     )
+  });
+}
+
+export async function sendSupportCaseReplyEmail(input: {
+  to: string;
+  subject: string;
+  body: string;
+  channel?: "support" | "business";
+  replyTo?: string;
+}) {
+  const from = input.channel === "business" ? getBusinessMailFrom() : getSupportMailFrom();
+
+  return sendViaResend({
+    from,
+    to: input.to,
+    subject: input.subject,
+    replyTo: input.replyTo,
+    html: renderAulexmedEmail({
+      preview: "AULEXMED support reply.",
+      eyebrow: input.channel === "business" ? "Business Support" : "Customer Support",
+      title: "AULEXMED Response",
+      intro: "AULEXMED has reviewed your message and is responding through the appropriate support channel.",
+      fields: [
+        { label: "To", value: input.to },
+        { label: "Channel", value: input.channel === "business" ? "Business" : "Support" }
+      ],
+      message: input.body,
+      footerNote: "This message is from the official AULEXMED support system. For medical advice, please consult a healthcare professional."
+    })
   });
 }

@@ -92,13 +92,15 @@ Sending mail:
 
 - Provider: Resend
 - Current code status: integrated through server-side utility functions
-- Use: website transactional mail, AI assistant escalation mail, support notifications, inquiry notifications
+- Use: website transactional mail, AI assistant escalation mail, support notifications, inquiry notifications, internal support-center replies
 
 Required Vercel environment variables:
 
 ```env
 RESEND_API_KEY=
 MAIL_FROM=AULEXMED <noreply@aulexmed.com>
+MAIL_FROM_SUPPORT=AULEXMED Support <support@aulexmed.com>
+MAIL_FROM_BUSINESS=AULEXMED Business <business@aulexmed.com>
 SUPPORT_EMAIL=support@aulexmed.com
 SALES_EMAIL=sales@aulexmed.com
 INFO_EMAIL=info@aulexmed.com
@@ -146,6 +148,18 @@ Supabase is used by the AI support chatbot for:
 - Knowledge retrieval from `support_knowledge_base`
 - Chat session storage in `chat_sessions`
 - Chat message storage in `chat_messages`
+- Internal AI mail support cases in `support_email_cases`
+- Internal AI mail support messages in `support_email_messages`
+- Internal AI mail support audit events in `support_email_events`
+
+The active Supabase project checked for support workflows is `aulexmed-support-voice-mvp`.
+
+Knowledge-related tables currently identified:
+
+- `support_knowledge_base`: primary support knowledge source for chatbot and AI mail analysis
+- `support_voicemails`: earlier voice support MVP records
+- `chat_sessions` and `chat_messages`: website chatbot storage
+- `support_email_cases`, `support_email_messages`, `support_email_events`: AI mail support center storage
 
 Environment variables used by the app:
 
@@ -167,17 +181,23 @@ Security notes:
 
 ## AI Chat Configuration
 
-The customer support chatbot uses:
+The customer support chatbot and internal mail support center use:
 
 - Supabase as the primary support knowledge source
 - DeepSeek for customer-friendly answer generation
 - Safe fallback answers when no relevant knowledge exists
+- Feishu for internal support notifications on email cases
+- Resend for human-reviewed outbound replies
 
 Environment variables:
 
 ```env
 DEEPSEEK_API_KEY=
 DEEPSEEK_MODEL=deepseek-v4-pro
+FEISHU_WEBHOOK_URL=
+SUPPORT_INGEST_SECRET=
+SUPPORT_CENTER_PASSWORD=
+SUPPORT_ADMIN_TOKEN=
 AULEXMED_CHAT_DEBUG=false
 ```
 
@@ -187,6 +207,13 @@ AI answer rules:
 - Do not hallucinate product details.
 - Avoid medical treatment claims.
 - Suggest human support when knowledge is incomplete or risk is high.
+
+Internal support route:
+
+- `/support-center`
+- no public navigation link
+- `noindex`
+- protected by `SUPPORT_CENTER_PASSWORD`
 
 ## Migration Steps
 

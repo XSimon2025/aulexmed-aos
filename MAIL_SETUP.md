@@ -7,6 +7,7 @@ Last updated: 2026-07-06
 - Cloudflare Email Routing receives mail for `aulexmed.com`.
 - All configured AULEXMED receiving addresses forward to `invosen.achao@gmail.com`.
 - Resend sends website, AI assistant, support, and system transactional email.
+- The internal AI Mail Support Center can send human-reviewed replies through Resend.
 - Human replies can be handled later through Gmail "Send mail as" / SMTP configuration.
 
 ## Cloudflare Status
@@ -72,6 +73,8 @@ Required Vercel environment variables:
 ```env
 RESEND_API_KEY=
 MAIL_FROM=AULEXMED <noreply@aulexmed.com>
+MAIL_FROM_SUPPORT=AULEXMED Support <support@aulexmed.com>
+MAIL_FROM_BUSINESS=AULEXMED Business <business@aulexmed.com>
 SUPPORT_EMAIL=support@aulexmed.com
 SALES_EMAIL=sales@aulexmed.com
 INFO_EMAIL=info@aulexmed.com
@@ -88,6 +91,7 @@ Code location:
 
 - `lib/email.ts`: centralized server-side sending utility using the Resend API.
 - `lib/emailTemplates.ts`: AULEXMED-branded transactional HTML templates.
+- `app/api/support/cases/[id]/reply/route.ts`: internal support-center reply sending endpoint.
 
 Prepared reusable functions:
 
@@ -97,6 +101,7 @@ Prepared reusable functions:
 - `sendQuoteEmail()`
 - `sendAutoReplyEmail()`
 - `sendChatbotEscalationEmail()`
+- `sendSupportCaseReplyEmail()`
 
 Prepared templates:
 
@@ -113,6 +118,7 @@ Behavior:
 - The API key is never exposed to browser code.
 - No marketing, newsletter, or mass-email logic is included.
 - Resend domain DNS records have been added in Cloudflare and verified in Resend.
+- Support-center replies use `MAIL_FROM_SUPPORT` for consumer support and `MAIL_FROM_BUSINESS` for B2B/business cases.
 
 Configured Resend DNS records:
 
