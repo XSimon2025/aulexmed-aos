@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "aos:roe:collect": "node --experimental-transform-types src/aos/roe/cli.ts collect",
+    "aos:roe:analyze": "node --experimental-transform-types src/aos/roe/cli.ts analyze",
+    "aos:roe:dry-run": "node --experimental-transform-types src/aos/roe/cli.ts dry-run"
   },
   "dependencies": {
     "next": "15.5.18",
