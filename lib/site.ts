@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "AULEXMED",
   slogan: "Back to Life. One Step at a Time.",
   legacySlogan: "Knee & Ankle Orthopedic Experts",
-  url: "https://www.aulexmed.com",
+  url: "https://aulexmed.com",
   email: "business@aulexmed.com",
   supportEmail: "support@aulexmed.com",
   ogImage: "/brand/back-to-life-hero.png",

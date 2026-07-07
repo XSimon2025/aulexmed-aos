@@ -8,7 +8,7 @@ type FeishuNotifyInput = {
 };
 
 function getCaseUrl(caseId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://www.aulexmed.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://aulexmed.com";
   return `${baseUrl.replace(/\/$/, "")}/support-center?case=${encodeURIComponent(caseId)}`;
 }
 

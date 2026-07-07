@@ -7,7 +7,7 @@ This document records the current infrastructure plan for the AULEXMED official 
 ## Current Domain Architecture
 
 - Primary domain: `aulexmed.com`
-- Canonical website URL in code: `https://www.aulexmed.com`
+- Canonical website URL in code: `https://aulexmed.com`
 - Website hosting: Vercel
 - DNS provider after migration: Cloudflare
 - Current Cloudflare zone status: `active`
@@ -36,7 +36,7 @@ Notes:
   - `AAAA aulexmed.com -> 2a02:4780:b:856:0:2154:4edc:2`
   - `A ftp.aulexmed.com -> 82.180.175.217`
   - `CNAME www.aulexmed.com -> aulexmed.com`
-- Vercel project `aulexmed-website` lists both `aulexmed.com` and `www.aulexmed.com` in its project domains.
+- Vercel currently serves `aulexmed.com` as the primary custom domain. `www.aulexmed.com` resolves through Vercel and redirects to `https://aulexmed.com`.
 
 ### Email Routing Records
 
