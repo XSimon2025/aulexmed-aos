@@ -107,7 +107,13 @@ async function supabaseRequest<T>(path: string, init: RequestInit = {}): Promise
     return null as T;
   }
 
-  return response.json() as Promise<T>;
+  const text = await response.text();
+
+  if (!text.trim()) {
+    return null as T;
+  }
+
+  return JSON.parse(text) as T;
 }
 
 function tokenize(value: string): string[] {
