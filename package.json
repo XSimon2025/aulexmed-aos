@@ -1,35 +1,31 @@
 {
-  "name": "aulexmed-brand-website",
+  "name": "@aulexmed/aos",
   "version": "0.1.0",
   "private": true,
+  "description": "AULEXMED Operating System — Operations Engine",
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "aos:roe:collect": "node --experimental-transform-types src/aos/roe/cli.ts collect",
-    "aos:roe:analyze": "node --experimental-transform-types src/aos/roe/cli.ts analyze",
-    "aos:roe:dry-run": "node --experimental-transform-types src/aos/roe/cli.ts dry-run"
+    "dev": "tsx src/cli/index.ts",
+    "build": "tsc",
+    "start": "node dist/cli/index.js",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "15.5.18",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "commander": "^13.0.0",
+    "dotenv": "^17.4.2",
+    "hono": "^4.6.0",
+    "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@types/node": "22.10.7",
-    "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3",
-    "autoprefixer": "10.4.20",
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^22.10.7",
     "eslint": "9.39.4",
-    "eslint-config-next": "15.5.18",
-    "postcss": "8.5.10",
-    "tailwindcss": "3.4.17",
-    "typescript": "5.7.3"
+    "tsx": "^4.19.0",
+    "typescript": "5.7.3",
+    "typescript-eslint": "^8.63.0"
   },
-  "overrides": {
-    "@eslint-community/eslint-utils": "4.9.1",
-    "@eslint/plugin-kit": "0.7.2",
-    "postcss": "8.5.10"
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
