@@ -95,8 +95,29 @@ CREATE TABLE IF NOT EXISTS review_daily_summaries (
 
 CREATE INDEX IF NOT EXISTS idx_daily_summaries_date ON review_daily_summaries (date DESC);
 
+-- ───── operator_logs ─────
+CREATE TABLE IF NOT EXISTS operator_logs (
+  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  module      TEXT NOT NULL,
+  platform    TEXT,
+  action      TEXT NOT NULL,
+  target_id   TEXT,
+  status      TEXT NOT NULL DEFAULT 'pending'
+                CHECK (status IN ('pending', 'running', 'success', 'failed', 'cancelled', 'human_review')),
+  input_data  JSONB DEFAULT '{}'::jsonb,
+  output_data JSONB DEFAULT '{}'::jsonb,
+  error_msg   TEXT,
+  started_at  TIMESTAMPTZ,
+  finished_at TIMESTAMPTZ,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_operator_logs_module ON operator_logs (module, status);
+CREATE INDEX IF NOT EXISTS idx_operator_logs_created ON operator_logs (created_at DESC);
+
 -- ───── RLS ─────
 ALTER TABLE review_cases ENABLE ROW LEVEL SECURITY;
 ALTER TABLE review_case_actions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE review_case_messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE review_daily_summaries ENABLE ROW LEVEL SECURITY;
+ALTER TABLE operator_logs ENABLE ROW LEVEL SECURITY;
