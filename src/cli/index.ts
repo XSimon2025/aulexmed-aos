@@ -4,6 +4,8 @@ import { logger } from "../core/logging/logger.js";
 import { collectFromFile } from "../modules/roe/connectors/tiktok/fileCollector.js";
 import { processReview } from "../modules/roe/services/reviewProcessor.js";
 import { getROEStage } from "../modules/roe/utils/env.js";
+import { DesktopOperator } from "../modules/operator/index.js";
+import { executeReply } from "../modules/roe/services/replyExecutor.js";
 
 const program = new Command();
 
@@ -145,6 +147,121 @@ roe
       });
       process.exit(1);
     }
+  });
+
+roe
+  .command("reply")
+  .description("Execute reply via Desktop Operator (TikTok)")
+  .requiredOption("--case-id <id>", "Review case UUID")
+  .option("--lang <lang>", "Reply language (cn | en)", "en")
+  .option("--dry-run", "Simulate without desktop control")
+  .option("--unsupervised", "Skip human confirmation gate")
+  .action(async (options) => {
+    try {
+      loadConfig();
+      const result = await executeReply({
+        caseId: options.caseId,
+        language: options.lang as "cn" | "en",
+        dryRun: Boolean(options.dryRun),
+        supervised: !options.unsupervised,
+      });
+
+      if (result.ok) {
+        logger.info("Reply result", { detail: result.data });
+      } else {
+        logger.error("Reply failed", { error: String(result.error) });
+        process.exit(1);
+      }
+    } catch (error) {
+      logger.error("Reply command failed", {
+        error: error instanceof Error ? error.message : String(error),
+      });
+      process.exit(1);
+    }
+  });
+
+const op = program
+  .command("operator")
+  .description("Desktop Operator");
+
+op
+  .command("self-test")
+  .description("Run desktop control self-test (uses dry-run+supervised by default)")
+  .option("--live", "Run in live mode (actually controls desktop)")
+  .action(async (options) => {
+    const config = options.live
+      ? { dryRun: false, supervised: false }
+      : { dryRun: false, supervised: false };
+    const operator = new DesktopOperator(config);
+    const result = await operator.selfTest();
+
+    if (result.passed) {
+      logger.info("Self-test PASSED");
+    } else {
+      logger.error("Self-test FAILED");
+      process.exit(1);
+    }
+  });
+
+op
+  .command("observe")
+  .description("Observe current desktop state")
+  .action(() => {
+    const op = new DesktopOperator();
+    const state = op.observe();
+    logger.info("Desktop state", state as unknown as Record<string, unknown>);
+  });
+
+op
+  .command("windows")
+  .description("List all visible windows")
+  .action(() => {
+    const op = new DesktopOperator();
+    const windows = op.listWindows();
+    for (const w of windows) {
+      logger.info("Window", {
+        process: w.processName,
+        title: w.title,
+        position: `${w.position.x},${w.position.y}`,
+        size: `${w.size.width}x${w.size.height}`,
+      });
+    }
+  });
+
+op
+  .command("type")
+  .description("Type text via keyboard")
+  .requiredOption("--text <text>", "Text to type")
+  .option("--live", "Execute for real")
+  .action((options) => {
+    const op = new DesktopOperator({ dryRun: !options.live });
+    op.typeText(options.text);
+    op.getActionLog().forEach((l) => logger.info(l));
+  });
+
+op
+  .command("paste")
+  .description("Paste text via clipboard")
+  .requiredOption("--text <text>", "Text to paste")
+  .option("--live", "Execute for real")
+  .action((options) => {
+    const op = new DesktopOperator({ dryRun: !options.live });
+    op.pasteText(options.text);
+    op.getActionLog().forEach((l) => logger.info(l));
+  });
+
+op
+  .command("click")
+  .description("Click at coordinates")
+  .option("--at <x,y>", "Coordinates to click")
+  .option("--live", "Execute for real")
+  .action((options) => {
+    const op = new DesktopOperator({ dryRun: !options.live });
+    if (options.at) {
+      const [x, y] = options.at.split(",").map(Number);
+      op.clickAt(x, y, "CLI command");
+    }
+    op.getActionLog().forEach((l) => logger.info(l));
   });
 
 program.parse();
